@@ -3,12 +3,13 @@ package uk.ac.ucl.mappingtool.test.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import uk.ac.ucl.mappingtool.test.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.test.domain.User;
 
 import java.util.*;
 
 @RestController
-@RequestMapping(value = "/test/users")   // set all mapping under users
+@RequestMapping(value = PropertyConst.root + "/users")   // set all mapping under users
 public class UserController {
 
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
