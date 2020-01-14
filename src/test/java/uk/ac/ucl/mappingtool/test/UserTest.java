@@ -39,44 +39,44 @@ public class UserTest {
 
     @Test
     public void testUserController() throws Exception {
-        // 测试UserController
-        // 1、get查一下user列表，应该为空
+        // Test UserController
+        // get empty list
         request = get("/test/users/");
         mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("[]")));
 
-        // 2、post提交一个user
+        // post a user
         request = post("/test/users/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"id\":1,\"name\":\"yangtao\",\"age\":20}");
         mvc.perform(request)
                 .andExpect(content().string(equalTo("success")));
 
-        // 3、get获取user列表，应该有刚才插入的数据
+        // get new user list
         request = get("/test/users/");
         mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("[{\"id\":1,\"name\":\"yangtao\",\"age\":20}]")));
 
-        // 4、put修改id为1的user
+        // put to user id = 1
         request = put("/test/users/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"terry\",\"age\":21}");
         mvc.perform(request)
                 .andExpect(content().string(equalTo("success")));
 
-        // 5、get一个id为1的user
+        // get to check user id = 1
         request = get("/test/users/1");
         mvc.perform(request)
                 .andExpect(content().string(equalTo("{\"id\":1,\"name\":\"terry\",\"age\":21}")));
 
-        // 6、del删除id为1的user
+        // delete user id = 1
         request = delete("/test/users/1");
         mvc.perform(request)
                 .andExpect(content().string(equalTo("success")));
 
-        // 7、get查一下user列表，应该为空
+        // check new user list
         request = get("/test/users/");
         mvc.perform(request)
                 .andExpect(status().isOk())
