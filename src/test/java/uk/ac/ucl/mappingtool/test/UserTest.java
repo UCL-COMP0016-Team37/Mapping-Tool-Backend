@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import uk.ac.ucl.mappingtool.controller.UserController;
+import uk.ac.ucl.mappingtool.test.controller.UserController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,9 +1,9 @@
-package uk.ac.ucl.mappingtool.controller;
+package uk.ac.ucl.mappingtool.test.controller;
 
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
-import uk.ac.ucl.mappingtool.domain.User;
+import uk.ac.ucl.mappingtool.test.domain.User;
 
 import java.util.*;
 

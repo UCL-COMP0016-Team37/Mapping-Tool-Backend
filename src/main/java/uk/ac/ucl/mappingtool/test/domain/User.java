@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.domain;
+package uk.ac.ucl.mappingtool.test.domain;
 
 
 import io.swagger.annotations.ApiModel;
