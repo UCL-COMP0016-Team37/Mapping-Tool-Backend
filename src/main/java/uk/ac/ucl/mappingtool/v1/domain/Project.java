@@ -8,13 +8,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @ApiModel(description = "Project Model")
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "projects")
 public class Project {
+
+    @Id
+    @ApiModelProperty("Project Unique ID")
     private String interaction_intervention_id;
+
     private String organization;
     private String org_intervention_id;
     private String project_tags;
