@@ -19,75 +19,75 @@ import javax.persistence.Table;
 @Table(name = "projects")
 public class Project {
 
-    @Id
+    @Id()
     @ApiModelProperty("Project Unique ID")
     private String interaction_intervention_id;
 
     @Column(nullable = false)
     private String organization;
-    @Column()
-    private String org_intervention_id;
-    @Column()
-    private String project_tags;
-    @Column(nullable = false)
-    private String project_name;
-    @Column()
-    private String project_description;
-    @Column()
+    @Column(name = "org_intervention_id")
+    private String orgInterventionId;
+    @Column(name = "project_tags")
+    private String projectTags;
+    @Column(nullable = false, name = "project_name")
+    private String projectName;
+    @Column(name = "project_description")
+    private String projectDescription;
+    @Column(name = "activities")
     private String activities;
-    @Column()
-    private String additional_information;
-    @Column()
-    private String start_date;
-    @Column()
-    private String end_date;
-    @Column()
+    @Column(name = "additional_information")
+    private String additionalInformation;
+    @Column(name = "start_date")
+    private String startDate;
+    @Column(name = "end_date")
+    private String endDate;
+    @Column(name = "sectors")
     private String sectors;
-    @Column()
-    private String cross_cutting_issues;
-    @Column()
-    private String budget_numeric;
-    @Column()
-    private String budget_currency;
-    @Column()
-    private String budget_value_date;
-    @Column()
-    private String international_partners;
-    @Column()
-    private String local_partners;
-    @Column()
-    private String prime_awardee;
-    @Column()
-    private String target_project_reach;
-    @Column()
-    private String actual_project_reach;
-    @Column()
-    private String project_reach_unit;
-    @Column()
-    private String target_groups;
-    @Column()
+    @Column(name = "cross_cutting_issues")
+    private String crossCuttingIssues;
+    @Column(name = "budget_numeric")
+    private String budgetNumeric;
+    @Column(name = "budget_currency")
+    private String budgetCurrency;
+    @Column(name = "budget_value_date")
+    private String budgetValueDate;
+    @Column(name = "international_partners")
+    private String internationalPartners;
+    @Column(name = "local_partners")
+    private String localPartners;
+    @Column(name = "prime_awardee")
+    private String primeAwardee;
+    @Column(name = "target_project")
+    private String targetProjectReach;
+    @Column(name = "actual_project_reach")
+    private String actualProjectReach;
+    @Column(name = "project_reach_unit")
+    private String projectReachUnit;
+    @Column(name = "target_groups")
+    private String targetGroups;
+    @Column(name = "geographicScope")
     private String geographic_scope;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "location")
     private String location;
-    @Column()
-    private String project_contact_person;
-    @Column()
-    private String project_contact_position;
-    @Column()
-    private String project_contact_email;
-    @Column()
-    private String project_contact_phone_number;
-    @Column()
-    private String project_website;
-    @Column()
-    private String date_provided;
-    @Column()
-    private String date_updated;
+    @Column(name = "project_contact_person")
+    private String projectContactPerson;
+    @Column(name = "project_contact_position")
+    private String projectContactPosition;
+    @Column(name = "project_contact_email")
+    private String projectContactEmail;
+    @Column(name = "project_contact_phone_number")
+    private String projectContactPhoneNumber;
+    @Column(name = "project_website")
+    private String projectWebsite;
+    @Column(name = "date_provided")
+    private String dateProvided;
+    @Column(name = "date_updated")
+    private String dateUpdated;
     @Column(nullable = false)
     private String status;
-    @Column()
+    @Column(name = "donors")
     private String donors;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "humanitarian")
     private String humanitarian;
 
 

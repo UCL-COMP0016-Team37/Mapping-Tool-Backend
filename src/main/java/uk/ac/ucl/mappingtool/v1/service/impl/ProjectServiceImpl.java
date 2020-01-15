@@ -28,7 +28,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Iterator<Project> getPartProject(int pageNum, int pageSize) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "interaction_intervention_id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "projectName");
         Pageable pageable = PageRequest.of(pageNum, pageSize, sort);
         Page<Project> projects = projectRepository.findAll(pageable);
         Iterator<Project> projectIterator = projects.iterator();
