@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
+@Entity
 @ApiModel(description = "Project Model")
 @NoArgsConstructor
 @AllArgsConstructor
