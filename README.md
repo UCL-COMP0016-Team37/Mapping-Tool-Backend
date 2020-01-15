@@ -25,6 +25,21 @@ Here are some notice when you play with these APIs:
 * Current version is already connected to the database so that it is very *dangerous* to use **PUT** and **DELETE**
     
     
+## Developing Process
+This section will discuss about conducting the development of one API module
+### Version Control
+It is implemented to three main branches: **master**, **dev** and **prod**.
+* master: It is for stable version only, which means developers can only commit to this branch
+when this state can *smoothly* work on the real server
+* dev: It is for developing processes, i.e. the 'master' branch for developing,
+ however developers cannot directly commit on this branch, they should make new branches for their own module
+* prod: It is the pipeline trigger. merge to this stage when developer wants to deplopy to the server
 
-    
-   
+### Spring Boot
+Generally, three steps should be implemented:
+* domain: where developer create POJO or Database Entity(if applicable)
+* repository: This project using JPA as the accessing tool so that developers need to implements the connection to database by JPA
+* service: First needs to have service interface then implement it.
+    * Service: this is interface which you should include *add*, *update* and *delete*
+    * ServiceImpl: implements the things above and add **@Service**
+* Controller: Only for sending and getting messages.
