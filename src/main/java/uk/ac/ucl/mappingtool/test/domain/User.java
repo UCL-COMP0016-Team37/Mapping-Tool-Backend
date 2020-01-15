@@ -8,20 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @ApiModel(description = "User Model")
-@Entity
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty("User id")
     private Long id;
 
@@ -32,12 +30,6 @@ public class User {
     @Column(nullable = false)
     @ApiModelProperty("User Age")
     private Integer age;
-
-    public User(String name, Integer age){
-        this.name = name;
-        this.age = age;
-    }
-
 }
 
 
