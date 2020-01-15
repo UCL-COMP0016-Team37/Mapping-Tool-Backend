@@ -11,8 +11,8 @@ import java.util.Date;
 @Entity
 @ApiModel(description = "User Model")
 @Table(name = "user")
-public class UserV1 {
-    public UserV1() {
+public class User {
+    public User() {
     }
 
     @Id

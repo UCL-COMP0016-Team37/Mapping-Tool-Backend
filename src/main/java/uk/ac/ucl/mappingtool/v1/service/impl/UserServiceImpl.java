@@ -6,18 +6,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import uk.ac.ucl.mappingtool.v1.domain.UserV1;
-import uk.ac.ucl.mappingtool.v1.repository.UserRepositoryV1;
-import uk.ac.ucl.mappingtool.v1.service.UserServiceV1;
+import uk.ac.ucl.mappingtool.v1.domain.User;
+import uk.ac.ucl.mappingtool.v1.repository.UserRepository;
+import uk.ac.ucl.mappingtool.v1.service.UserService;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceV1ImplV1 implements UserServiceV1 {
+public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepositoryV1 userRepositoryV1;
+    private UserRepository userRepository;
 
     /**
      * Delete some user by id
@@ -25,26 +25,26 @@ public class UserServiceV1ImplV1 implements UserServiceV1 {
      */
     @Override
     public void delete(int id) {
-        userRepositoryV1.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     /**
-     * Add new userV1
-     * @param userV1
+     * Add new user
+     * @param user
      */
     @Override
-    public void insert(UserV1 userV1) {
-        userRepositoryV1.save(userV1);
+    public void insert(User user) {
+        userRepository.save(user);
     }
 
     /**
-     * update some userV1 by id
-     * @param userV1
+     * update some user by id
+     * @param user
      * @return
      */
     @Override
-    public int update(UserV1 userV1) {
-        userRepositoryV1.save(userV1);
+    public int update(User user) {
+        userRepository.save(user);
         return 1;
     }
 
@@ -54,10 +54,10 @@ public class UserServiceV1ImplV1 implements UserServiceV1 {
      * @return
      */
     @Override
-    public UserV1 selectById(int id) {
-        Optional<UserV1> optional = userRepositoryV1.findById(id);
-        UserV1 userV1 = optional.get();
-        return userV1;
+    public User selectById(int id) {
+        Optional<User> optional = userRepository.findById(id);
+        User user = optional.get();
+        return user;
     }
 
     /**
@@ -67,16 +67,16 @@ public class UserServiceV1ImplV1 implements UserServiceV1 {
      * @return
      */
     @Override
-    public Iterator<UserV1> selectAll(int pageNum, int pageSize) {
+    public Iterator<User> selectAll(int pageNum, int pageSize) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(pageNum, pageSize, sort);
-        Page<UserV1> users = userRepositoryV1.findAll(pageable);
-        Iterator<UserV1> userIterator =  users.iterator();
+        Page<User> users = userRepository.findAll(pageable);
+        Iterator<User> userIterator =  users.iterator();
         return  userIterator;
     }
 
     @Override
-    public List<UserV1> getAll(){
-        return userRepositoryV1.findAll();
+    public List<User> getAll(){
+        return userRepository.findAll();
     }
 }
