@@ -14,7 +14,7 @@ Also, Json format static API docs are available at this [link](http://mapping-to
 These are current implemented version of API base urls:
 * Version 1 (https://mapping-tool-api.azurewebsites.net/api/v1)
     * Users (https://mapping-tool-api.azurewebsites.net/api/v1/users)
-    * Projects (Not Yet)
+    * Projects (https://mapping-tool-api.azurewebsites.net/api/v1/projects)
     * Search (Not Yet? May not Need it)
 
 
