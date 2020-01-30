@@ -36,6 +36,12 @@ public class RestTemplateTest {
     /**
      * Request iati cloud apis
      * We need to fraud the server which has SSL protection as a browser
+     *
+     * This api only have 4 field:
+     *  - id
+     *  - recipient country
+     *  - recipient region
+     *  - sectors
      */
     @Test
     public void testRestTemplate1() throws URISyntaxException{
