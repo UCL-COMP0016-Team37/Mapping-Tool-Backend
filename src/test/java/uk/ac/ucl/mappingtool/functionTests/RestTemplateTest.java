@@ -41,7 +41,7 @@ public class RestTemplateTest {
      *  - id
      *  - recipient country
      *  - recipient region
-     *  - sectors
+     *  - activitySectors
      */
     @Test
     public void testRestTemplate1() throws URISyntaxException{
@@ -62,4 +62,26 @@ public class RestTemplateTest {
 
         System.out.println(result.getBody());
     }
+
+    @Test
+    public void testRestTemplate2(){
+        // add a header to pretend as a browser
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+
+
+        // use exchange for request
+        RestTemplate restTemplate = new RestTemplate();
+
+        final String url = "https://iatidatastore.iatistandard.org/api/activities/GB-CHC-285776-DRC429/?format=json&fields=transactions";
+
+        ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.GET,entity,String.class);
+
+        Assert.assertEquals(200, result.getStatusCodeValue());
+
+        System.out.println(result.getBody());
+    }
+
+
 }
