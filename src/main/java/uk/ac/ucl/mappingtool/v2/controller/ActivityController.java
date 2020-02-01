@@ -23,4 +23,10 @@ public class ActivityController {
     public Activity getSingleActivity(@PathVariable String id){
         return activityService.getActivityById(id);
     }
+
+    @GetMapping("/{id}/{field}")
+    @ApiOperation(value = "Obtain one specific information detail of the activity", notes = "Get the activity detail information of one {field} by the {id} param in the url")
+    public String getSingleFieldActivity(@PathVariable String id, @PathVariable String field){
+        return activityService.getActivityByIdAndField(id, field);
+    }
 }
