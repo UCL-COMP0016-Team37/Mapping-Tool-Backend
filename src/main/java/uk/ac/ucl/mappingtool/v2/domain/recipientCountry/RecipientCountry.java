@@ -3,6 +3,7 @@ package uk.ac.ucl.mappingtool.v2.domain.recipientCountry;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uk.ac.ucl.mappingtool.v2.domain.narrative.Narrative;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
 public class RecipientCountry {
     private Country country;
     private Integer percentage;
-    private List<String> narratives;
+    private List<Narrative> narratives;
 }

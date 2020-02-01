@@ -20,11 +20,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Activity {
+
+    // default entries
     private String iati_identifier;
     private List<RecipientCountry> recipient_countries;
-
     @JsonSerialize(include= JsonSerialize.Inclusion.NON_EMPTY)
     private List<RecipientRegion> recipient_regions;
     @JsonSerialize(include= JsonSerialize.Inclusion.NON_EMPTY)
     private List<ActivitySector> sectors;
+
+    // additional entries
+//    private boolean humanitarian;
 }
