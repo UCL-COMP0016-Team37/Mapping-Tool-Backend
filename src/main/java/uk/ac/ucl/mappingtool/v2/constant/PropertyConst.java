@@ -7,7 +7,7 @@ import java.util.Set;
 public class PropertyConst {
     public static final String root = "/api/v2";
 
-    public static final Set<String> IGNORANCE;   // ignorance for attributes
+    public static final Set<String> ALL_FIELDS;   // ignorance for attributes
 
     static{
         Set<String> temp = new HashSet<String>();
@@ -16,6 +16,6 @@ public class PropertyConst {
         temp.add("sectors");
         temp.add("humanitarian");
 
-        IGNORANCE = Collections.unmodifiableSet(temp);
+        ALL_FIELDS = Collections.unmodifiableSet(temp);
     }
 }

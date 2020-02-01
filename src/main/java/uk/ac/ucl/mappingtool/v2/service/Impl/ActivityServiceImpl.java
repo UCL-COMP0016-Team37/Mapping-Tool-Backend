@@ -21,10 +21,8 @@ import java.util.Set;
 public class ActivityServiceImpl implements ActivityService {
     @Override
     public Activity getActivityById(String iatiId) {
-        String activityJson = requestActivity(iatiId);
-        Gson gson = new Gson();
-
-        Activity activityObject = gson.fromJson(activityJson, Activity.class);
+        String activityJson = requestActivityJson(iatiId);
+        Activity activityObject = requestActivityObject(activityJson);
 
         return activityObject;
     }
@@ -32,10 +30,8 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public String getActivityByIdAndField(String iatiId, String field) {
-        String activityJson = requestActivity(iatiId);
-        Gson gson = new Gson();
-
-        Activity activityObject = gson.fromJson(activityJson, Activity.class);
+        String activityJson = requestActivityJson(iatiId);
+        Activity activityObject = requestActivityObject(activityJson);
 
         /* serialize it*/
         GsonBuilder gsonBuilder = new GsonBuilder().disableHtmlEscaping();
@@ -43,7 +39,7 @@ public class ActivityServiceImpl implements ActivityService {
         gsonBuilder.serializeNulls();
 
         // eliminate specific field for output
-        Set<String> ignore = new HashSet<>(PropertyConst.IGNORANCE);
+        Set<String> ignore = new HashSet<>(PropertyConst.ALL_FIELDS);
         ignore.remove(field);
 
         // add strategies
@@ -59,7 +55,7 @@ public class ActivityServiceImpl implements ActivityService {
             }
         });
 
-        gson = gsonBuilder.create();
+        Gson gson = gsonBuilder.create();
         String result = gson.toJson(activityObject);
 
         return result;
@@ -68,9 +64,10 @@ public class ActivityServiceImpl implements ActivityService {
     /**
      * Help Function
      * set request to get information from iati cloud api
+     * @param iatiId
      * @return json result of single activity information
      */
-    private String requestActivity(String iatiId){
+    private String requestActivityJson(String iatiId){
         // add a header to pretend as a browser
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
@@ -85,5 +82,19 @@ public class ActivityServiceImpl implements ActivityService {
         ResponseEntity<String> result = restTemplate.exchange(url, HttpMethod.GET,entity,String.class);
 
         return result.getBody();
+    }
+
+
+    /**
+     * Help Function
+     * The deserialization process for creating activity objects
+     * @param json
+     * @return the Activity Object after deserialization
+     */
+    private Activity requestActivityObject(String json){
+        Gson gson = new Gson();
+        Activity activityObject = gson.fromJson(json, Activity.class);
+
+        return activityObject;
     }
 }
