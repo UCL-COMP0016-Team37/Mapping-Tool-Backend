@@ -1,6 +1,9 @@
 package uk.ac.ucl.mappingtool.functionTests;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ucl.mappingtool.v2.domain.Activity;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class GsonTest {
     private String res;
+    private List<String> ignorance;
 
     @Before
     public void setup(){
@@ -41,5 +49,59 @@ public class GsonTest {
         Activity activityObject = gson.fromJson(activityJson, Activity.class);
 
         System.out.println(activityObject.toString());
+    }
+
+    @Test
+    public void testGsonSerialize1(){
+        String activityJson = res;
+        Gson gson = new Gson();
+        Activity activityObject = gson.fromJson(activityJson, Activity.class);
+
+        /* serialize it*/
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        // serialize null value
+        gsonBuilder.serializeNulls();
+
+        gson = gsonBuilder.create();
+        String result = gson.toJson(activityObject);
+
+        System.out.println(result);
+    }
+
+    @Test
+    public void testGsonSerializeIgnore(){
+        String activityJson = res;
+        Gson gson = new Gson();
+        Activity activityObject = gson.fromJson(activityJson, Activity.class);
+
+
+        /* set ignorance */
+        ignorance = new ArrayList<>();
+        ignorance.add("recipient_regions");
+        ignorance.add("sectors");
+
+        /* serialize it*/
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        // serialize null value
+        gsonBuilder.serializeNulls();
+
+        gsonBuilder.addSerializationExclusionStrategy(new ExclusionStrategy() {
+            @Override
+            public boolean shouldSkipField(FieldAttributes f) {
+                return ignorance.contains(f.getName());
+            }
+
+            @Override
+            public boolean shouldSkipClass(Class<?> aClass) {
+                return false;
+            }
+        });
+
+        gson = gsonBuilder.create();
+        String result = gson.toJson(activityObject);
+
+        System.out.println(result);
+
+
     }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Default activity POJO
  * N.B. Must add @JsonSerialize(include= JsonSerialize.Inclusion.NON_EMPTY) to possible null entities
+ * Non successful mapping entities will be automatically set as theirs default value
  */
 @Data
 @AllArgsConstructor
