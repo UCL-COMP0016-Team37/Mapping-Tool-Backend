@@ -5,9 +5,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uk.ac.ucl.mappingtool.v2.domain.activityScope.ActivityScope;
+import uk.ac.ucl.mappingtool.v2.domain.activityStatus.ActivityStatus;
 import uk.ac.ucl.mappingtool.v2.domain.recipientCountry.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.recipientRegion.RecipientRegion;
 import uk.ac.ucl.mappingtool.v2.domain.activitySector.ActivitySector;
+import uk.ac.ucl.mappingtool.v2.domain.reportingOrg.ReportingOrg;
 
 import java.util.List;
 
@@ -31,5 +34,9 @@ public class Activity {
     private List<ActivitySector> sectors;
 
     // additional entries
-//    private boolean humanitarian;
+    private Boolean humanitarian;
+    private Integer hierarchy;
+    private ActivityStatus activity_status;
+    private ActivityScope activity_scope;
+    private ReportingOrg reporting_org;
 }

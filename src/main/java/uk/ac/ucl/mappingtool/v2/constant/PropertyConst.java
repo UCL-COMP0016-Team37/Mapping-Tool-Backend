@@ -15,6 +15,10 @@ public class PropertyConst {
         temp.add("recipient_regions");
         temp.add("sectors");
         temp.add("humanitarian");
+        temp.add("hierarchy");
+        temp.add("activity_status");
+        temp.add("activity_scope");
+        temp.add("reporting_org");
 
         ALL_FIELDS = Collections.unmodifiableSet(temp);
     }
