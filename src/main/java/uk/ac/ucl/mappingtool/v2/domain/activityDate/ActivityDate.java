@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.activityDates;
+package uk.ac.ucl.mappingtool.v2.domain.activityDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

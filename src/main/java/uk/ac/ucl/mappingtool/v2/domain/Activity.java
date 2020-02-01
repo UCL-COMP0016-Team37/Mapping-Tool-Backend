@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ucl.mappingtool.v2.domain.activityDates.ActivityDate;
+import uk.ac.ucl.mappingtool.v2.domain.activityDate.ActivityDate;
 import uk.ac.ucl.mappingtool.v2.domain.activityScope.ActivityScope;
 import uk.ac.ucl.mappingtool.v2.domain.activityStatus.ActivityStatus;
 import uk.ac.ucl.mappingtool.v2.domain.description.Description;
