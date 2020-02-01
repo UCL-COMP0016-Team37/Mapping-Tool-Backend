@@ -19,6 +19,11 @@ public class PropertyConst {
         temp.add("activity_status");
         temp.add("activity_scope");
         temp.add("reporting_org");
+        temp.add("title");
+        temp.add("descriptions");
+        temp.add("participating_organisations");
+        temp.add("other_identifier");
+        temp.add("activity_dates");
 
         ALL_FIELDS = Collections.unmodifiableSet(temp);
     }
