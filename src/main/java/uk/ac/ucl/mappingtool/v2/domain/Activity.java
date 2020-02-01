@@ -10,7 +10,6 @@ import uk.ac.ucl.mappingtool.v2.domain.activityScope.ActivityScope;
 import uk.ac.ucl.mappingtool.v2.domain.activityStatus.ActivityStatus;
 import uk.ac.ucl.mappingtool.v2.domain.contactInfo.ContactInfo;
 import uk.ac.ucl.mappingtool.v2.domain.description.Description;
-import uk.ac.ucl.mappingtool.v2.domain.location.Location;
 import uk.ac.ucl.mappingtool.v2.domain.otherIdentifier.OtherIdentifier;
 import uk.ac.ucl.mappingtool.v2.domain.participatingOrg.ParticipatingOrg;
 import uk.ac.ucl.mappingtool.v2.domain.recipientCountry.RecipientCountry;
@@ -52,7 +51,9 @@ public class Activity {
     private List<OtherIdentifier> other_identifier;
     private List<ActivityDate> activity_dates;
     private List<ContactInfo> contact_info;
-    private List<Location> locations;
+
+
+
 
 
 }
