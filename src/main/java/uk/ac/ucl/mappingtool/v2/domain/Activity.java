@@ -11,6 +11,7 @@ import uk.ac.ucl.mappingtool.v2.domain.activityStatus.ActivityStatus;
 import uk.ac.ucl.mappingtool.v2.domain.contactInfo.ContactInfo;
 import uk.ac.ucl.mappingtool.v2.domain.defaultAidType.DefaultAidType;
 import uk.ac.ucl.mappingtool.v2.domain.description.Description;
+import uk.ac.ucl.mappingtool.v2.domain.documentLink.DocLink;
 import uk.ac.ucl.mappingtool.v2.domain.location.Location;
 import uk.ac.ucl.mappingtool.v2.domain.otherIdentifier.OtherIdentifier;
 import uk.ac.ucl.mappingtool.v2.domain.participatingOrg.ParticipatingOrg;
@@ -55,6 +56,8 @@ public class Activity {
     private List<ContactInfo> contact_info;
     private List<Location> locations;
     private List<DefaultAidType> default_aid_type;
+    private String transactions;  // url temp
+    private List<DocLink> document_links;
 
 
 

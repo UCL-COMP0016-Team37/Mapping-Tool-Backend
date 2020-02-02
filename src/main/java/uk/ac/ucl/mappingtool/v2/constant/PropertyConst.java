@@ -27,6 +27,8 @@ public class PropertyConst {
         temp.add("contact_info");
         temp.add("locations");
         temp.add("default_aid_type");
+        temp.add("transactions");
+        temp.add("document_links");
 
         ALL_FIELDS = Collections.unmodifiableSet(temp);
     }
