@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v1.config;
+package uk.ac.ucl.mappingtool;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
