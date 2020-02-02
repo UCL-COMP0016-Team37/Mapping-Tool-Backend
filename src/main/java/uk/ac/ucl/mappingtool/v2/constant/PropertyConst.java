@@ -26,6 +26,7 @@ public class PropertyConst {
         temp.add("activity_dates");
         temp.add("contact_info");
         temp.add("locations");
+        temp.add("default_aid_type");
 
         ALL_FIELDS = Collections.unmodifiableSet(temp);
     }

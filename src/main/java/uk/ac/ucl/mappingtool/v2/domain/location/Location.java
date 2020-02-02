@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uk.ac.ucl.mappingtool.v2.domain.defaultAidType.DefaultAidType;
 import uk.ac.ucl.mappingtool.v2.domain.description.Description;
 import uk.ac.ucl.mappingtool.v2.domain.reportingOrg.ReportingOrg;
 import uk.ac.ucl.mappingtool.v2.domain.script.Script;
@@ -29,4 +30,5 @@ public class Location {
     private LocationClass location_class;
     private Script feature_designation; // ?? just guess
     private List<ReportingOrg> reporting_organisations;
+    private DefaultAidType default_aid_type;
 }
