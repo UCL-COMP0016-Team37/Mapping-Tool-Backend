@@ -29,6 +29,7 @@ public class PropertyConst {
         temp.add("default_aid_type");
         temp.add("transactions");
         temp.add("document_links");
+        temp.add("related_activities");
 
         ALL_FIELDS = Collections.unmodifiableSet(temp);
     }

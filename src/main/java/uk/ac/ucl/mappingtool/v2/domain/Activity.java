@@ -18,6 +18,7 @@ import uk.ac.ucl.mappingtool.v2.domain.participatingOrg.ParticipatingOrg;
 import uk.ac.ucl.mappingtool.v2.domain.recipientCountry.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.recipientRegion.RecipientRegion;
 import uk.ac.ucl.mappingtool.v2.domain.activitySector.ActivitySector;
+import uk.ac.ucl.mappingtool.v2.domain.relatedActivity.RelatedActivity;
 import uk.ac.ucl.mappingtool.v2.domain.reportingOrg.ReportingOrg;
 import uk.ac.ucl.mappingtool.v2.domain.title.Title;
 
@@ -58,6 +59,7 @@ public class Activity {
     private List<DefaultAidType> default_aid_type;
     private String transactions;  // url temp
     private List<DocLink> document_links;
+    private List<RelatedActivity> related_activities;
 
 
 
