@@ -30,6 +30,7 @@ public class PropertyConst {
         temp.add("transactions");
         temp.add("document_links");
         temp.add("related_activities");
+        temp.add("budgets");
 
         ALL_FIELDS = Collections.unmodifiableSet(temp);
     }

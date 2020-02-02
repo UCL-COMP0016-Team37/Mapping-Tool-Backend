@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import uk.ac.ucl.mappingtool.v2.domain.activityDate.ActivityDate;
 import uk.ac.ucl.mappingtool.v2.domain.activityScope.ActivityScope;
 import uk.ac.ucl.mappingtool.v2.domain.activityStatus.ActivityStatus;
+import uk.ac.ucl.mappingtool.v2.domain.budget.Budget;
 import uk.ac.ucl.mappingtool.v2.domain.contactInfo.ContactInfo;
 import uk.ac.ucl.mappingtool.v2.domain.defaultAidType.DefaultAidType;
 import uk.ac.ucl.mappingtool.v2.domain.description.Description;
@@ -60,8 +61,7 @@ public class Activity {
     private String transactions;  // url temp
     private List<DocLink> document_links;
     private List<RelatedActivity> related_activities;
-
-
+    private List<Budget> budgets;
 
 
 
