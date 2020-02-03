@@ -16,11 +16,13 @@ These are current implemented version of API base urls:
     * Users (https://mapping-tool-api.azurewebsites.net/api/v1/users)
     * Projects (https://mapping-tool-api.azurewebsites.net/api/v1/projects)
     * Search (Not Yet? May not Need it)
+* Version 2 (https://mapping-tool-api.azurewebsites.net/api/v2)
+    * Activity (https://mapping-tool-api.azurewebsites.net/api/v1/activity)
 
 
 ## Attentions
 Here are some notice when you play with these APIs:
-* **GET** is *save* to use since it doesn't alter the state of the server. In other words, a method is safe if it leads to a read-only operation.
+* **GET** is *save* to use since it does not alter the state of the server. In other words, a method is safe if it leads to a read-only operation.
 * **PUT** and **DELETE** is *prohibit* to use for test purposes, which means you have to ensure the design of usage is correct to implement.
 * Current version is already connected to the database so that it is very *dangerous* to use **PUT** and **DELETE**
     
