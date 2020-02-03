@@ -17,7 +17,7 @@ These are current implemented version of API base urls:
     * Projects (https://mapping-tool-api.azurewebsites.net/api/v1/projects)
     * Search (Not Yet? May not Need it)
 * Version 2 (https://mapping-tool-api.azurewebsites.net/api/v2)
-    * Activity (https://mapping-tool-api.azurewebsites.net/api/v1/activity)
+    * Activity (https://mapping-tool-api.azurewebsites.net/api/v2/activity)
 
 
 ## Attentions
