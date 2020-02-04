@@ -2,6 +2,8 @@ package uk.ac.ucl.mappingtool.v2.domain.activity;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +36,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(description = "IATI standard Activity Model")
 public class Activity {
 
     // default entries

@@ -22,13 +22,13 @@ public class Location {
     private LocationReach location_reach;
     private LocationId location_id;
     private Script name;
-    private Description description;
-    private Description activity_description;
-    private List<Type> administrative; //?? just guess
+    private Script description;
+    private Script activity_description;
+    private List<Administrative> administrative;
     private Point point;
     private Exactness exactness;
     private LocationClass location_class;
-    private Script feature_designation; // ?? just guess
+    private Type feature_designation;
     private List<ReportingOrg> reporting_organisations;
     private DefaultAidType default_aid_type;
 }
