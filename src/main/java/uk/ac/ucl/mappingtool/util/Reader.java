@@ -7,10 +7,11 @@ import java.io.*;
 public class Reader {
 
     private static final String ENCODE = "utf-8";
+    private static String rootDir = System.getProperty("user.dir");
 
     public static String readFileContent(String filePath) throws IOException {
 
-        File inputFile = new File(filePath);
+        File inputFile = new File(rootDir + filePath);
 
         String result = FileUtils.readFileToString(inputFile, ENCODE);
 

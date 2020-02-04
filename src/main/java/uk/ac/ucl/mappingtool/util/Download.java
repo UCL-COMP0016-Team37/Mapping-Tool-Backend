@@ -10,14 +10,18 @@ import java.net.URL;
 
 public class Download {
 
+    private static String rootDir = System.getProperty("user.dir");
+
     public static void downloadHttpUrl(String url, String dir, String fileName) throws IOException {
+        String dirPath = rootDir + dir;
+
         URL httpUrl = new URL(url);
-        File dirFile = new File(dir);
+        File dirFile = new File(dirPath);
 
         if(!dirFile.exists()){
             dirFile.mkdirs();
         }
 
-        FileUtils.copyURLToFile(httpUrl, new File(dir + fileName));
+        FileUtils.copyURLToFile(httpUrl, new File(dirPath + fileName));
     }
 }
