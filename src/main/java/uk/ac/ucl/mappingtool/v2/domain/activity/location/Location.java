@@ -28,7 +28,7 @@ public class Location {
     private Point point;
     private Exactness exactness;
     private LocationClass location_class;
-    private Type feature_designation; // ?? just guess
+    private Type feature_designation;
     private List<ReportingOrg> reporting_organisations;
     private DefaultAidType default_aid_type;
 }
