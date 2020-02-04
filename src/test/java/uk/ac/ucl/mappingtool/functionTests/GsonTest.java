@@ -39,7 +39,7 @@ public class GsonTest {
     }
 
 
-    @Test
+//    @Test
     public void testGsonSerialize(){
         String activityJson = res;
         Gson gson = new Gson();
@@ -49,7 +49,7 @@ public class GsonTest {
         System.out.println(activityObject.toString());
     }
 
-    @Test
+//    @Test
     public void testGsonSerialize1(){
         String activityJson = res;
         Gson gson = new Gson();
@@ -66,7 +66,7 @@ public class GsonTest {
         System.out.println(result);
     }
 
-    @Test
+//    @Test
     public void testGsonSerializeIgnore(){
         String activityJson = res;
         Gson gson = new Gson();
