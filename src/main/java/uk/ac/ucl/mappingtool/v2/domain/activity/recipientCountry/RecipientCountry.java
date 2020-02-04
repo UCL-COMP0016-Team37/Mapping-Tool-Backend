@@ -12,6 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class RecipientCountry {
     private Country country;
-    private Integer percentage;
+    private Double percentage;
     private List<Narrative> narratives;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RecipientRegion {
     private Region region;
-    private Integer percentage;
+    private Double percentage;
     private Vocabulary vocabulary;
     private String vocabulary_uri;
     private List<Narrative> narratives;

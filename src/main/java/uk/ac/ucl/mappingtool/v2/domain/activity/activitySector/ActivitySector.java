@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ActivitySector {
     private Sector sector;
-    private Integer percentage;
+    private Double percentage;
     private Vocabulary vocabulary;
     private String vocabulary_uri;
     private List<Narrative> narratives;
