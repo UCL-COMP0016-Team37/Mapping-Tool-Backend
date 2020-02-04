@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
-import uk.ac.ucl.mappingtool.v2.domain.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.service.ActivityService;
 
 import java.util.HashSet;

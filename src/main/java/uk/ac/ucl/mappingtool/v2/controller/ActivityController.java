@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
-import uk.ac.ucl.mappingtool.v2.domain.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.service.ActivityService;
 
 @RestController

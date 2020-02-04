@@ -4,7 +4,6 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -12,10 +11,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import uk.ac.ucl.mappingtool.v2.domain.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class GsonTest {
