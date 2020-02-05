@@ -1,5 +1,6 @@
 package uk.ac.ucl.mappingtool.v2.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@Api(value = "Publisher/Organisation Controller" , tags = {"Publisher/Organisation Controller"})
 @RequestMapping(value = PropertyConst.root + "/publisher")
 public class PublisherController {
     @Autowired
@@ -39,7 +41,7 @@ public class PublisherController {
 
     @PostMapping("/remote")
     @ApiOperation(
-            value = "Download the newest data from IATI Registry and upload to the real database -- ",
+            value = "Download the newest data from IATI Registry and upload to the real database",
             notes = "DANGEROUS, It will actually modify the database; only do it when permitted"
     )
     public void updateAll() throws IOException {
