@@ -4,6 +4,7 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -11,8 +12,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ucl.mappingtool.util.Reader;
+import uk.ac.ucl.mappingtool.v2.domain.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +105,37 @@ public class GsonTest {
 
         System.out.println(result);
 
+    }
+
+//    @Test
+    public void testGsonSerializePublisherList() throws IOException {
+        String json = Reader.readFileContent("/src/main/resources/static/orgList.json");
+
+        Gson gson = new Gson();
+
+        Type founderListType = new TypeToken<ArrayList<Publisher>>(){}.getType();
+
+        List<Publisher> publisherList = gson.fromJson(json, founderListType);
+
+        System.out.println(publisherList);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
