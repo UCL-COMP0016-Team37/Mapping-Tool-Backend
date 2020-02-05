@@ -20,7 +20,7 @@ public class RestTemplateTest {
     /**
      * Request mapping tool apis
      */
-    @Test
+//    @Test
     public void testRestTemplate() throws URISyntaxException {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -44,7 +44,7 @@ public class RestTemplateTest {
      *  - recipient region
      *  - activitySectors
      */
-    @Test
+//    @Test
     public void testRestTemplate1() throws URISyntaxException{
         // add a header to pretend as a browser
         HttpHeaders headers = new HttpHeaders();
@@ -64,7 +64,7 @@ public class RestTemplateTest {
         System.out.println(result.getBody());
     }
 
-    @Test
+//    @Test
     public void testRestTemplate2(){
         // add a header to pretend as a browser
         HttpHeaders headers = new HttpHeaders();
@@ -84,7 +84,7 @@ public class RestTemplateTest {
         System.out.println(result.getBody());
     }
 
-    @Test
+//    @Test
     public void testRestTemplate3(){
         // add a header to pretend as a browser
         HttpHeaders headers = new HttpHeaders();
