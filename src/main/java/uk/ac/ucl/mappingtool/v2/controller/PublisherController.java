@@ -7,6 +7,7 @@ import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.Publisher;
 import uk.ac.ucl.mappingtool.v2.service.PublisherService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,11 @@ public class PublisherController {
     @PostMapping("/")
     public void createPublisher(Publisher publisher){
         publisherService.insert(publisher);
+    }
+
+    @PostMapping("/remote")
+    public void updateAll() throws IOException {
+        publisherService.insertAll();
     }
 
     @DeleteMapping("/{id}")
