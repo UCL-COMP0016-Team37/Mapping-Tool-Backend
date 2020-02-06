@@ -9,6 +9,8 @@ import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 import uk.ac.ucl.mappingtool.v2.domain.transaction.Transaction;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionTest {
 
@@ -32,7 +34,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void testSerializeListView() {
+    public void testSerializeSingleListView() {
         String url = "https://iatidatastore.iatistandard.org/api/activities/2839519/transactions/?format=json";
         String json = HttpRequest.requestJson(url);
 
@@ -43,4 +45,30 @@ public class TransactionTest {
 
         System.out.println(transactionList);
     }
+
+    @Test
+    public void testSerializeMultiListView(){
+        // get the first one
+        String url = "https://iatidatastore.iatistandard.org/api/activities/5185937/transactions/?format=json";
+        String json = HttpRequest.requestJson(url);
+        Type transactionType = new TypeToken<ListView<Transaction>>() {}.getType();
+        Gson gson = new Gson();
+        ListView<Transaction> transactionList = gson.fromJson(json, transactionType);
+
+        List<Transaction> totalTransactions = transactionList.getResults();
+
+        // get all with loop
+        int count = transactionList.getCount(); // the count of total
+        int totalPages = count / 10 + 1;
+
+        for(int i = 2; i <= totalPages; i++){
+            String nextUrl = "https://iatidatastore.iatistandard.org/api/activities/5185937/transactions/?format=json&page=" + i;
+            String nextJson = HttpRequest.requestJson(nextUrl);
+            ListView<Transaction> nextTransactionList = gson.fromJson(nextJson, transactionType);
+            totalTransactions.addAll(nextTransactionList.getResults());
+        }
+
+        System.out.println(totalTransactions);
+    }
+
 }
