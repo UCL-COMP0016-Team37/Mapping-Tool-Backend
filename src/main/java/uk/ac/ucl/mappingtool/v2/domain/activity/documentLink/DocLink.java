@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uk.ac.ucl.mappingtool.v2.domain.activity.description.Description;
-import uk.ac.ucl.mappingtool.v2.domain.activity.narrative.Language;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.narrative.Language;
 import uk.ac.ucl.mappingtool.v2.domain.activity.title.Title;
-import uk.ac.ucl.mappingtool.v2.domain.activity.type.Type;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.type.Type;
 
 import java.util.List;
 

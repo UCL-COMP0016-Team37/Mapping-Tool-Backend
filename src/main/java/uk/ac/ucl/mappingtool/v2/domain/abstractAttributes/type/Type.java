@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.activity.type;
+package uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
