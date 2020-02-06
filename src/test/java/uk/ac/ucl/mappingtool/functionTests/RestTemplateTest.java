@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 
 import java.net.URI;
@@ -113,6 +114,16 @@ public class RestTemplateTest {
 
         Assert.assertEquals(200, result.getStatusCodeValue());
         System.out.println(result.getBody());
+    }
+
+
+    @Test
+    public void testHttpRequestUtil(){
+        final String url = "https://iatidatastore.iatistandard.org/api/activities/GB-CHC-285776-DRC429/?format=json";
+
+        String result = HttpRequest.requestJson(url);
+
+        System.out.println(result);
     }
 
 
