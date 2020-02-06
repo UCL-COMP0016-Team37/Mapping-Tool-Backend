@@ -117,7 +117,7 @@ public class RestTemplateTest {
     }
 
 
-    @Test
+//    @Test
     public void testHttpRequestUtil(){
         final String url = "https://iatidatastore.iatistandard.org/api/activities/GB-CHC-285776-DRC429/?format=json";
 
