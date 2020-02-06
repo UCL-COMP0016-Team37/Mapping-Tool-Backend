@@ -11,7 +11,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-public class WebConfiguration extends WebMvcConfigurerAdapter {
+public class GsonConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.removeIf(httpMessageConverter -> httpMessageConverter instanceof MappingJackson2HttpMessageConverter); // 删除MappingJackson2HttpMessageConverter
