@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain;
+package uk.ac.ucl.mappingtool.v2.domain.publisher;
 
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModelProperty;

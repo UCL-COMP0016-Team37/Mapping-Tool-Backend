@@ -2,8 +2,13 @@ package uk.ac.ucl.mappingtool.v2;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
+import uk.ac.ucl.mappingtool.util.HttpRequest;
+import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 import uk.ac.ucl.mappingtool.v2.domain.transaction.Transaction;
+
+import java.lang.reflect.Type;
 
 public class TransactionTest {
 
@@ -26,4 +31,16 @@ public class TransactionTest {
         System.out.println(result);
     }
 
+    @Test
+    public void testSerializeListView() {
+        String url = "https://iatidatastore.iatistandard.org/api/activities/2839519/transactions/?format=json";
+        String json = HttpRequest.requestJson(url);
+
+        Type transactionType = new TypeToken<ListView<Transaction>>() {}.getType();
+
+        Gson gson = new Gson();
+        ListView<Transaction> transactionList = gson.fromJson(json, transactionType);
+
+        System.out.println(transactionList);
+    }
 }

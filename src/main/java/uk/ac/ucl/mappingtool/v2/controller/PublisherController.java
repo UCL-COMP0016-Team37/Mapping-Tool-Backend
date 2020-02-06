@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
-import uk.ac.ucl.mappingtool.v2.domain.Publisher;
+import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.service.PublisherService;
 
 import java.io.IOException;
