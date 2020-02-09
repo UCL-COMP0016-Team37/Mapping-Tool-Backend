@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CountryDetail {
     private String code;
 //    private String language;
