@@ -1,6 +1,6 @@
 package uk.ac.ucl.mappingtool.v2.service;
 
-import uk.ac.ucl.mappingtool.v2.domain.Publisher;
+import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 
 import java.io.IOException;
 import java.util.List;

@@ -6,14 +6,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.ac.ucl.mappingtool.util.Reader;
-import uk.ac.ucl.mappingtool.v2.domain.Publisher;
+import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 
 import java.io.IOException;

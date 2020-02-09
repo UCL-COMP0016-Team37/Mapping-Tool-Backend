@@ -4,8 +4,8 @@ package uk.ac.ucl.mappingtool.v2.domain.activity.recipientRegion;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ucl.mappingtool.v2.domain.activity.narrative.Narrative;
-import uk.ac.ucl.mappingtool.v2.domain.activity.vocabulary.Vocabulary;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.narrative.Narrative;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.vocabulary.Vocabulary;
 
 import java.util.List;
 

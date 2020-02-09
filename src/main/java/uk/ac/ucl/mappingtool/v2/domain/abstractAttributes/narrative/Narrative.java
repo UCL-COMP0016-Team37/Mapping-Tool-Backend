@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.activity.narrative;
+package uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.narrative;
 
 
 import lombok.AllArgsConstructor;

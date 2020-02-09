@@ -1,13 +1,13 @@
-package uk.ac.ucl.mappingtool.v2.domain.activity.vocabulary;
+package uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.narrative;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Vocabulary {
+@NoArgsConstructor
+public class Language {
     private String code;
     private String name;
 }
