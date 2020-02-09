@@ -3,8 +3,8 @@ package uk.ac.ucl.mappingtool.v2.domain.activity.contactInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ucl.mappingtool.v2.domain.activity.script.Script;
-import uk.ac.ucl.mappingtool.v2.domain.activity.type.Type;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.script.Script;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.type.Type;
 
 @Data
 @NoArgsConstructor

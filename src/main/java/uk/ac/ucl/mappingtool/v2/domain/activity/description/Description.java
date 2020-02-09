@@ -3,8 +3,8 @@ package uk.ac.ucl.mappingtool.v2.domain.activity.description;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uk.ac.ucl.mappingtool.v2.domain.activity.narrative.Narrative;
-import uk.ac.ucl.mappingtool.v2.domain.activity.type.Type;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.narrative.Narrative;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.type.Type;
 
 import java.util.List;
 

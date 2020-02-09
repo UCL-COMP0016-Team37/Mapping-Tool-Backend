@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ucl.mappingtool.util.Download;
 import uk.ac.ucl.mappingtool.util.Reader;
-import uk.ac.ucl.mappingtool.v2.domain.Publisher;
+import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.repository.PublisherRepository;
 import uk.ac.ucl.mappingtool.v2.service.PublisherService;
 

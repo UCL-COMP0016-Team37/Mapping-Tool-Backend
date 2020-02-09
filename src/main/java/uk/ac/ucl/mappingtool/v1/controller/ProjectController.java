@@ -1,6 +1,7 @@
 package uk.ac.ucl.mappingtool.v1.controller;
 
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @RestController
+@Api(value = "Sample Project Controller", tags = {"Sample Project Controller"})
 @RequestMapping(value = PropertyConst.root + "/projects")
 public class ProjectController {
 

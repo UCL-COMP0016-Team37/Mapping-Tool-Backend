@@ -1,6 +1,7 @@
 package uk.ac.ucl.mappingtool.v2.controller;
 
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.service.ActivityService;
 
 @RestController
+@Api(value = "IATI Activity Controller", tags = {"IATI Activity Controller"})
 @RequestMapping(value = PropertyConst.root + "/activities")
 public class ActivityController {
 

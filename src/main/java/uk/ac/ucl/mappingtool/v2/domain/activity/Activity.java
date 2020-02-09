@@ -1,9 +1,7 @@
 package uk.ac.ucl.mappingtool.v2.domain.activity;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,9 +40,7 @@ public class Activity {
     // default entries
     private String iati_identifier;
     private List<RecipientCountry> recipient_countries;
-    @JsonSerialize(include= JsonSerialize.Inclusion.NON_EMPTY)
     private List<RecipientRegion> recipient_regions;
-    @JsonSerialize(include= JsonSerialize.Inclusion.NON_EMPTY)
     private List<ActivitySector> sectors;
 
     // additional entries

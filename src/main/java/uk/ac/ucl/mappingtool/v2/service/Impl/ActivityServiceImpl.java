@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.service.ActivityService;
@@ -68,15 +69,7 @@ public class ActivityServiceImpl implements ActivityService {
      * @return json result of single activity information
      */
     private String requestActivityJson(String iatiId){
-        /* add a header to pretend as a browser */
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
-
-        /* use exchange for request */
-        RestTemplate restTemplate = new RestTemplate();
-
+        // build request url
         final String url = "https://iatidatastore.iatistandard.org/api/activities/" + iatiId + "/?format=json";
         StringBuilder sb = new StringBuilder();
         sb.append(url);
@@ -90,9 +83,7 @@ public class ActivityServiceImpl implements ActivityService {
 
         final String fieldsUrl = sb.toString();
 
-        ResponseEntity<String> result = restTemplate.exchange(fieldsUrl, HttpMethod.GET,entity,String.class);
-
-        return result.getBody();
+        return HttpRequest.requestJson(fieldsUrl);
     }
 
 
