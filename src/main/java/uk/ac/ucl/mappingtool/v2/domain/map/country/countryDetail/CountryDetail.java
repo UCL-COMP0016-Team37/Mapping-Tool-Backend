@@ -7,13 +7,11 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class CountryDetail {
     private String code;
-    private String language;
+//    private String language;
     private String activities;
     private CountryLocation location;
-    private CountryPolygon polygon;
+//    private CountryPolygon polygon;
 
 }
