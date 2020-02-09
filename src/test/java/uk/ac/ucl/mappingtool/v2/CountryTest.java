@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CountryTest {
 
-    @Test
+//    @Test
     public void testCountryOne() {
         String countryUrl = "https://iatidatastore.iatistandard.org/api/countries/?format=json";
         String json = HttpRequest.requestJson(countryUrl);
@@ -30,7 +30,7 @@ public class CountryTest {
         System.out.println(countries.toString());
     }
 
-    @Test
+//    @Test
     public void testCountryDetailOne() {
         String countryDetailUrl = "https://iatidatastore.iatistandard.org/api/countries/AE/?format=json";
         String json = HttpRequest.requestJson(countryDetailUrl);
@@ -43,7 +43,7 @@ public class CountryTest {
         System.out.println(countryDetail);
     }
 
-    @Test
+//    @Test
     public void testCountryDatabaseOne() {
         String countryUrl = "https://iatidatastore.iatistandard.org/api/countries/?format=json";
         String json = HttpRequest.requestJson(countryUrl);
@@ -72,7 +72,7 @@ public class CountryTest {
         System.out.println(country);
     }
 
-    @Test
+//    @Test
     public void testCountriesOnePage() {
         String countryUrl = "https://iatidatastore.iatistandard.org/api/countries/?format=json";
         String json = HttpRequest.requestJson(countryUrl);
@@ -105,7 +105,7 @@ public class CountryTest {
     }
 
 
-    @Test
+//    @Test
     public void testCountriesMultiPages() {
         String countryUrl = "https://iatidatastore.iatistandard.org/api/countries/?format=json";
         String json = HttpRequest.requestJson(countryUrl);
