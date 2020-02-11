@@ -2,18 +2,20 @@ package uk.ac.ucl.mappingtool.v1.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(description = "User Model")
 @Table(name = "user")
 public class User {
-    public User() {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
