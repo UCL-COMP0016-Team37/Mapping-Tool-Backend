@@ -64,12 +64,10 @@ public class UserController {
     }
 
 
-    @GetMapping("/?name={name}")
-    public void getSingleUserByName(@PathVariable("name")String name){
-        userService.getByName(name);
+    @GetMapping("/query/name={name}")
+    public User getSingleUserByName(@PathVariable("name") String name){
+        return userService.getByName(name);
     }
-
-
 
 
 

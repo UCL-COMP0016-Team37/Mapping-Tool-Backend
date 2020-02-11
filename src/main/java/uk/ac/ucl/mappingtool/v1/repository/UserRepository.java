@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import uk.ac.ucl.mappingtool.v1.domain.User;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
@@ -15,6 +17,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     int updateById(String name,int id);
 
-    @Query("from User u where u.username=:username")   //SPEL expression
+    @Query(value = "select u from User u where u.username = :username")   //SPEL expression
     User findUser(@Param("username") String username);// Param username, map username in db
 }
