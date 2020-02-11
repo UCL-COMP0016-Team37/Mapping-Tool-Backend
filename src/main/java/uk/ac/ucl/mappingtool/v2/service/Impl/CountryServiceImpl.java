@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
-import uk.ac.ucl.mappingtool.v2.domain.map.country.Country;
-import uk.ac.ucl.mappingtool.v2.domain.map.country.countryDetail.CountryDetail;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.country.Country;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryCount.ActivityItem;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryDetail.CountryDetail;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 import uk.ac.ucl.mappingtool.v2.repository.CountryRepository;
 import uk.ac.ucl.mappingtool.v2.service.CountryService;
@@ -46,10 +48,12 @@ public class CountryServiceImpl implements CountryService {
         Gson gson = new Gson();
         ListView<Country> countryListView = gson.fromJson(json, countryType);
 
+        // first page
         List<Country> totalCountries = new ArrayList<>();
         List<Country> countries = countryListView.getResults();
         for (Country country : countries) {
             getCountryDetails(country);
+            getCountryTotalActivities(country);
         }
 
         totalCountries.addAll(countries);
@@ -68,6 +72,7 @@ public class CountryServiceImpl implements CountryService {
             for (Country country : nextCountries) {
                 try {
                     getCountryDetails(country);
+                    getCountryTotalActivities(country);
                 }catch (HttpServerErrorException hsee){
                     continue;
                 }
@@ -105,5 +110,21 @@ public class CountryServiceImpl implements CountryService {
         country.setLongitude(longitude.toString());
         country.setLatitude(latitude.toString());
 
+    }
+
+
+    private void getCountryTotalActivities(Country country) throws HttpServerErrorException{
+        // get the country code and request the result
+        String countryCode = country.getCode();
+        String url = "https://iatidatastore.iatistandard.org/api/activities/?format=json&recipient_country=" + countryCode;
+        String json = HttpRequest.requestJson(url);
+
+        Gson gson = new Gson();
+        Type countryActivityType = new TypeToken<ListView<ActivityItem>>() {}.getType();
+        ListView<Activity> countryActivityListView = gson.fromJson(json, countryActivityType);
+
+        // set total activity count for a country
+        int count = countryActivityListView.getCount();
+        country.setCount(count);
     }
 }

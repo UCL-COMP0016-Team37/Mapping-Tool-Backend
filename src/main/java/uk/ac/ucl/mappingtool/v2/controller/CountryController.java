@@ -5,14 +5,14 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
-import uk.ac.ucl.mappingtool.v2.domain.map.country.Country;
+import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 import uk.ac.ucl.mappingtool.v2.service.CountryService;
 
 import java.util.List;
 
 @RestController
 @Api(value = "Country Controller", tags = {"Country Controller"})
-@RequestMapping(value = PropertyConst.root + "/Country")
+@RequestMapping(value = PropertyConst.root + "/countries")
 public class CountryController {
     @Autowired
     private CountryService countryService;

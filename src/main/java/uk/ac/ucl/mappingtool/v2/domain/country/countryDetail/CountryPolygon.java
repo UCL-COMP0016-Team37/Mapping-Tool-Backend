@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.map.country.countryDetail;
+package uk.ac.ucl.mappingtool.v2.domain.country.countryDetail;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
