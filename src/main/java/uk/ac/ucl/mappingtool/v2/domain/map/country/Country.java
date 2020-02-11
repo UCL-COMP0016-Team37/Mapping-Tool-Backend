@@ -29,4 +29,6 @@ public class Country {
     private String longitude;
     @Column
     private String latitude;
+    @Column(name = "total_projects")
+    private Integer count;
 }

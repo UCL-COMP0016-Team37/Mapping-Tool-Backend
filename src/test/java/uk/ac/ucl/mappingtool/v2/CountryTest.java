@@ -5,7 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 import org.springframework.web.client.HttpServerErrorException;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.domain.map.country.Country;
+import uk.ac.ucl.mappingtool.v2.domain.map.country.countryCount.ActivityItem;
 import uk.ac.ucl.mappingtool.v2.domain.map.country.countryDetail.CountryDetail;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 
@@ -97,15 +99,15 @@ public class CountryTest {
 //            // set longitude and latitude
 //            country.setLongitude(longitude.toString());
 //            country.setLatitude(latitude.toString());
-
             getCountryDetails(country);
+            getCountryTotalActivities(country);
         }
 
         System.out.println(countries.toString());
     }
 
 
-//    @Test
+    @Test
     public void testCountriesMultiPages() {
         String countryUrl = "https://iatidatastore.iatistandard.org/api/countries/?format=json";
         String json = HttpRequest.requestJson(countryUrl);
@@ -137,6 +139,7 @@ public class CountryTest {
             for (Country country : nextCountries) {
                 try {
                     getCountryDetails(country);
+                    getCountryTotalActivities(country);
                 }catch (HttpServerErrorException hsee){
                     continue;
                 }
@@ -150,7 +153,7 @@ public class CountryTest {
     }
 
 
-    private void getCountryDetails(Country country) {
+    private void getCountryDetails(Country country) throws HttpServerErrorException{
 
         /* each country */
         String countryDetailUrl = country.getUrl();
@@ -167,6 +170,22 @@ public class CountryTest {
         country.setLongitude(longitude.toString());
         country.setLatitude(latitude.toString());
 
+    }
+
+    private void getCountryTotalActivities(Country country) throws HttpServerErrorException{
+        String countryCode = country.getCode();
+        String url = "https://iatidatastore.iatistandard.org/api/activities/?format=json&recipient_country=" + countryCode;
+        String json = HttpRequest.requestJson(url);
+
+        Gson gson = new Gson();
+        Type countryActivityType = new TypeToken<ListView<ActivityItem>>() {}.getType();
+        ListView<Activity> countryActivityListView = gson.fromJson(json, countryActivityType);
+
+        //System.out.println(countryActivityListView.getResults());
+        //System.out.println(countryActivityListView.getCount());
+
+        int count = countryActivityListView.getCount();
+        country.setCount(count);
     }
 
 
