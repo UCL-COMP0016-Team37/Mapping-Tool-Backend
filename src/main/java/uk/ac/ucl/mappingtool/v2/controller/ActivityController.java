@@ -22,13 +22,13 @@ public class ActivityController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Obtain the information of one activity", notes = "Get the activity detail information by the {id} param in the url")
-    public Activity getSingleActivity(@PathVariable String id){
+    public Activity getSingleActivity(@PathVariable("id") String id){
         return activityService.getActivityById(id);
     }
 
     @GetMapping("/{id}/{field}")
     @ApiOperation(value = "Obtain one specific field detail of the activity", notes = "Get the activity detail information of one {field} by the {id} param in the url")
-    public String getSingleFieldActivity(@PathVariable String id, @PathVariable String field){
+    public String getSingleFieldActivity(@PathVariable("id") String id, @PathVariable("field") String field){
         return activityService.getActivityByIdAndField(id, field);
     }
 }

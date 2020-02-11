@@ -63,5 +63,4 @@ public class Activity {
     private List<Budget> budgets;
 
 
-
 }
