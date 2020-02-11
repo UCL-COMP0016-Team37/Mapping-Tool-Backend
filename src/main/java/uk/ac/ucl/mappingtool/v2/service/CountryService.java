@@ -1,6 +1,6 @@
 package uk.ac.ucl.mappingtool.v2.service;
 
-import uk.ac.ucl.mappingtool.v2.domain.map.country.Country;
+import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 
 import java.util.List;
 

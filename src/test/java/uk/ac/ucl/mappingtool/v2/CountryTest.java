@@ -2,13 +2,12 @@ package uk.ac.ucl.mappingtool.v2;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.junit.Test;
 import org.springframework.web.client.HttpServerErrorException;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
-import uk.ac.ucl.mappingtool.v2.domain.map.country.Country;
-import uk.ac.ucl.mappingtool.v2.domain.map.country.countryCount.ActivityItem;
-import uk.ac.ucl.mappingtool.v2.domain.map.country.countryDetail.CountryDetail;
+import uk.ac.ucl.mappingtool.v2.domain.country.Country;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryCount.ActivityItem;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryDetail.CountryDetail;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 
 import java.lang.reflect.Type;
@@ -107,7 +106,7 @@ public class CountryTest {
     }
 
 
-    @Test
+//    @Test
     public void testCountriesMultiPages() {
         String countryUrl = "https://iatidatastore.iatistandard.org/api/countries/?format=json";
         String json = HttpRequest.requestJson(countryUrl);
