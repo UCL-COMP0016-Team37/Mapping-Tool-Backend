@@ -19,7 +19,7 @@ public class PublisherController {
     private PublisherService publisherService;
 
     @GetMapping("/")
-    @ApiOperation(value = "Get the list of all available publishers/orgnisations")
+    @ApiOperation(value = "Get the list of all available publishers/organisations")
     public List<Publisher> getAllPublisher(){
         return publisherService.getAll();
     }
