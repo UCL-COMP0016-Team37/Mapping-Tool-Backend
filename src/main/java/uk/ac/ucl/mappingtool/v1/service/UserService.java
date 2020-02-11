@@ -13,4 +13,5 @@ public interface UserService {
     public User selectById(int id);
     public Iterator<User> selectAll(int pageNum, int pageSize);
     public List<User> getAll();
+    public User getByName(String userName);
 }
