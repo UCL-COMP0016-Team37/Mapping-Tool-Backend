@@ -2,7 +2,9 @@ package uk.ac.ucl.mappingtool.v1.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,11 +12,10 @@ import java.util.Date;
 @Data
 @Entity
 @ApiModel(description = "User Model")
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user")
 public class User {
-    public User() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @ApiModelProperty("User id")
