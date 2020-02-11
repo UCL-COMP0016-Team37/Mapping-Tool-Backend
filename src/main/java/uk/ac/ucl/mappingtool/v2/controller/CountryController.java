@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @Api(value = "Country Controller", tags = {"Country Controller"})
-@RequestMapping(value = PropertyConst.root + "/Country")
+@RequestMapping(value = PropertyConst.root + "/countries")
 public class CountryController {
     @Autowired
     private CountryService countryService;

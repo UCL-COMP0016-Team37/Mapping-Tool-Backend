@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @Api(value = "Publisher/Organisation Controller" , tags = {"Publisher/Organisation Controller"})
-@RequestMapping(value = PropertyConst.root + "/publisher")
+@RequestMapping(value = PropertyConst.root + "/publishers")
 public class PublisherController {
     @Autowired
     private PublisherService publisherService;
