@@ -34,7 +34,7 @@ public class MapController {
         return mapService.getAllPins();
     }
 
-    @GetMapping(PIN + "/{code}/")
+    @GetMapping(PIN + "/{code}")
     @ApiOperation(
             value = "Obtain the information of one project pin",
             tags = {"Pin Map Controller"}
@@ -45,6 +45,10 @@ public class MapController {
 
 
     @GetMapping(PIN + "/{code}/{page}")
+    @ApiOperation(
+            value = "Obtain the result list on a pin, and show the list with a size of 10",
+            tags = {"Pin Map Controller"}
+            )
     public List<ActivityDisplayItem> getDetailPins(@PathVariable("code") String code, @PathVariable("page") Integer page){
         return mapService.getPartPins(code, page);
     }
