@@ -41,12 +41,13 @@ public class MapServiceImpl implements MapService {
 
     private ProjectPin createPinObject(Country country){
         String code = country.getCode();
+        String name = country.getName();
         String longitude = country.getLongitude();
         String latitude = country.getLatitude();
         Coordinate coordinate = new Coordinate(longitude, latitude);
         Integer count = country.getCount();
 
-        ProjectPin pin = new ProjectPin(code, coordinate, count);
+        ProjectPin pin = new ProjectPin(code, name, coordinate, count);
 
         return pin;
     }
