@@ -8,7 +8,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.domain.country.Country;
-import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityItem;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityNumItem;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryDetail.CountryDetail;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 import uk.ac.ucl.mappingtool.v2.repository.CountryRepository;
@@ -120,7 +120,7 @@ public class CountryServiceImpl implements CountryService {
         String json = HttpRequest.requestJson(url);
 
         Gson gson = new Gson();
-        Type countryActivityType = new TypeToken<ListView<ActivityItem>>() {}.getType();
+        Type countryActivityType = new TypeToken<ListView<ActivityNumItem>>() {}.getType();
         ListView<Activity> countryActivityListView = gson.fromJson(json, countryActivityType);
 
         // set total activity count for a country

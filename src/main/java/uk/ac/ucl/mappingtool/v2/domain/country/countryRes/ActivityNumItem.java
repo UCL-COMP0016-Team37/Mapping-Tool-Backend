@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityItem {
+public class ActivityNumItem {
     private String iati_identifier;
-//    private List<RecipientCountry> recipient_countries;
-//    private List<RecipientRegion> recipient_regions;
-//    private List<ActivitySector> sectors;
 }
