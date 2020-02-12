@@ -16,10 +16,11 @@ import javax.persistence.Table;
 @Entity
 @ApiModel(description = "Project Model")
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "projects")
 public class Project {
 
-    @Id()
+    @Id
     @ApiModelProperty("Project Unique ID")
     private String interaction_intervention_id;
 

@@ -1,6 +1,6 @@
 package uk.ac.ucl.mappingtool.v2.service;
 
-import uk.ac.ucl.mappingtool.v2.domain.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 
 public interface ActivityService {
     public Activity getActivityById(String iatiId);

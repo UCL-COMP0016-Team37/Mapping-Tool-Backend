@@ -1,6 +1,7 @@
 package uk.ac.ucl.mappingtool.v1.controller;
 
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @RestController
+@Api(value = "User Controller", tags = {"User Controller"})
 @RequestMapping(value = PropertyConst.root + "/users")
 public class UserController {
 
