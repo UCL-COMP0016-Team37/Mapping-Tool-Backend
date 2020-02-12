@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
 import uk.ac.ucl.mappingtool.v2.service.MapService;
 
@@ -33,12 +34,18 @@ public class MapController {
         return mapService.getAllPins();
     }
 
-    @GetMapping(PIN + "/{code}")
+    @GetMapping(PIN + "/{code}/")
     @ApiOperation(
             value = "Obtain the information of one project pin",
             tags = {"Pin Map Controller"}
             )
     public ProjectPin getOnePin(@PathVariable("code") String code ){
         return mapService.getOnePin(code);
+    }
+
+
+    @GetMapping(PIN + "/{code}/{page}")
+    public List<ActivityDisplayItem> getDetailPins(@PathVariable("code") String code, @PathVariable("page") Integer page){
+        return mapService.getPartPins(code, page);
     }
 }
