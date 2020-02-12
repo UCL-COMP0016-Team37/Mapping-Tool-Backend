@@ -13,7 +13,8 @@ import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.coordinate.Coordinate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectPin {
-    private String countryCode;
+    private String code;
+    private String countryName;
     private Coordinate coordinate;
     private Integer activityCount;
 }
