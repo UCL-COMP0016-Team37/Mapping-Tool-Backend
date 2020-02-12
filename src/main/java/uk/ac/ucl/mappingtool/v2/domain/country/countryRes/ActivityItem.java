@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.country.countryCount;
+package uk.ac.ucl.mappingtool.v2.domain.country.countryRes;
 
 
 import lombok.AllArgsConstructor;

@@ -6,7 +6,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
 import uk.ac.ucl.mappingtool.v2.domain.country.Country;
-import uk.ac.ucl.mappingtool.v2.domain.country.countryCount.ActivityItem;
+import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityItem;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryDetail.CountryDetail;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 
