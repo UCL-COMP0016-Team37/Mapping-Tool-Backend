@@ -12,15 +12,28 @@ import java.lang.reflect.Type;
 public class FilterTest {
     @Test
     public void testFilterOne(){
-        String filterUrl = "https://iatidatastore.iatistandard.org/search/activity?q=recipient_country_code:AF";
+        String filterUrl = "https://iati.cloud/search/activity?q=sector_code:(111)&fl=iati_identifier,title_*&wt=json&rows=5";
         String json = HttpRequest.requestJson(filterUrl);
 
-        System.out.println(json);
-//        Type responseType = new TypeToken<ResponseView>(){}.getType();
-//
-//        Gson gson = new Gson();
-//        ResponseView responseView = gson.fromJson(json, responseType);
-//
-//        System.out.println(responseView);
+//        System.out.println(json);
+        Type responseType = new TypeToken<ResponseView>(){}.getType();
+
+        Gson gson = new Gson();
+        ResponseView responseView = gson.fromJson(json, responseType);
+
+        System.out.println(responseView);
+    }
+
+    @Test
+    public void testFilterMultiple(){
+        String filterUrl = "https://iati.cloud/search/activity?q=reporting_org_type_code:(10) OR sector_code:(11130) AND recipient_country_code:(AF)&fl=iati_identifier,title_*&wt=json&rows=10";
+        String json = HttpRequest.requestJson(filterUrl);
+
+        Type responseType = new TypeToken<ResponseView>(){}.getType();
+
+        Gson gson = new Gson();
+        ResponseView responseView = gson.fromJson(json, responseType);
+
+        System.out.println(responseView);
     }
 }
