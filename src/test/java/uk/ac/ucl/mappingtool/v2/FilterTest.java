@@ -36,4 +36,31 @@ public class FilterTest {
 
         System.out.println(responseView);
     }
+
+    @Test
+    public void testFilterInput(){
+        String query = "sector_code:(111)";
+        int page = 10;
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://iati.cloud/search/activity?");
+        sb.append("q=");
+        sb.append(query); // query
+        sb.append("&wt=json&rows=");
+        sb.append(10);
+        sb.append("&start="); // page
+        sb.append(page * 10);
+
+        String url = sb.toString();
+        String json = HttpRequest.requestJson(url);
+
+        Type responseType = new TypeToken<ResponseView>(){}.getType();
+
+        Gson gson = new Gson();
+        ResponseView responseView = gson.fromJson(json, responseType);
+
+        System.out.println(responseView.getResponse());
+
+    }
 }
