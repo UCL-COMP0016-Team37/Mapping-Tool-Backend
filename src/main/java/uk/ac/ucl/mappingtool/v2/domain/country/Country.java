@@ -13,8 +13,8 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "countries")
 public class Country {
     @Id
