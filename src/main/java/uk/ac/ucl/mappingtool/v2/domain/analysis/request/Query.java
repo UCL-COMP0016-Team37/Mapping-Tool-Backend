@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Query {
+@AllArgsConstructor
+public class Query<T> {
     private Integer count;
-    private List<QueryItem> results;
+    private List<QueryItem<T>> results;
 }

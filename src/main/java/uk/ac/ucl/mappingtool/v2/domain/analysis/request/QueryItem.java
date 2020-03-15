@@ -1,6 +1,7 @@
 package uk.ac.ucl.mappingtool.v2.domain.analysis.request;
 
 
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QueryItem {
-    private RecipientCountry recipient_country;
+public class QueryItem<T> {
+    @SerializedName(value = "recipient_country", alternate = {"sector"})
+    private T group;  // can be changed to what you want to group
     private Integer activity_count;
     private Double value;
 }

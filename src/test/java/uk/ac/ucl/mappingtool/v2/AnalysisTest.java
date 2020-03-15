@@ -1,14 +1,15 @@
 package uk.ac.ucl.mappingtool.v2;
 
 import com.google.gson.Gson;
-import io.swagger.models.auth.In;
+import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph.CountryItem;
-import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 
+import java.lang.reflect.Type;
 import java.util.*;
 
 public class AnalysisTest {
@@ -18,8 +19,10 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
+        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, Query.class);
+        Query queryObject = gson.fromJson(json, queryType);
 
         System.out.println(queryObject);
     }
@@ -30,11 +33,13 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
+        Type queryType = new TypeToken<Query<RecipientCountry>>(){}.getType();
+
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, Query.class);
+        Query queryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem> results = queryObject.getResults();
+        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<QueryItem>() {
@@ -49,6 +54,8 @@ public class AnalysisTest {
                 }
             }
         });
+
+        System.out.println(results);
     }
 
     @Test
@@ -57,11 +64,13 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
+        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, Query.class);
+        Query queryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem> results = queryObject.getResults();
+        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<QueryItem>() {
@@ -77,16 +86,22 @@ public class AnalysisTest {
             }
         });
 
+//        System.out.println(results);
+
         // sum up the total
         double total = 0;
         for(QueryItem item : results){
             total += item.getValue();
         }
 
+
         // get the top 4 and rest
         List<CountryItem> tops = new ArrayList<>();
+
         for(int i = 0; i < 4; i++){
-            String name = results.get(i).getRecipient_country().getName();
+            RecipientCountry recipientCountry = (RecipientCountry)results.get(i).getGroup();
+
+            String name = recipientCountry.getName();
             Double value = results.get(i).getValue();
             Double percentage = value * 100 / total;
 
