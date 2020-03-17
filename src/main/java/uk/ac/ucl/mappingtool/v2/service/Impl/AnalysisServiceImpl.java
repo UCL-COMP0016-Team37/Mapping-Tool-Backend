@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class AnalysisServiceImpl implements AnalysisService {
     @Override
-    public FundingToCountry plotFundingToCountryGraph(int sectorCode) {
+    public FundingToCountry plotBudgetToCountryGraph(int sectorCode) {
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=" + sectorCode;
         String json = HttpRequest.requestJson(url);
 
