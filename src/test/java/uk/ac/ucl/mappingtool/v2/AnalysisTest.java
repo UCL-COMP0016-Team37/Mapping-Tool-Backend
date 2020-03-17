@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQuery;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.Sector;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
@@ -277,6 +281,37 @@ public class AnalysisTest {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            }
+        });
+
+        System.out.println(results);
+    }
+
+    @Test
+    public void testSectorForCountry(){
+        String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=sector&aggregations=count&recipient_country=AF";
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
+
+        Type queryType = new TypeToken<ActivityQuery<Sector>>(){}.getType();
+
+        Gson gson = new Gson();
+        ActivityQuery activityQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<ActivityQueryItem<Sector>> results = activityQueryObject.getResults();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new Comparator<ActivityQueryItem>() {
+            @Override
+            public int compare(ActivityQueryItem o1, ActivityQueryItem o2) {
+                if (o1.getCount() > o2.getCount()){
+                    return -1;
+                } else if(o1.getCount() < o2.getCount()){
                     return 1;
                 } else{
                     return 0;

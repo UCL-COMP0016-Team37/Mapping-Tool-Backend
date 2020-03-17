@@ -380,6 +380,8 @@ public class AnalysisServiceImpl implements AnalysisService {
         return graph;
     }
 
+
+
     private class ValueComparator implements Comparator<BudgetQueryItem> {
         @Override
         public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {

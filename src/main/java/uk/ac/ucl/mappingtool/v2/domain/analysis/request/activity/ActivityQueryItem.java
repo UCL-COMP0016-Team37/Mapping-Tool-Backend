@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ActivityQueryItem<T>{
-    @SerializedName(value = "reporting_organisation", alternate = {})
+    @SerializedName(value = "reporting_organisation", alternate = {"sector"})
     private T group;
     private Integer count;
 }
