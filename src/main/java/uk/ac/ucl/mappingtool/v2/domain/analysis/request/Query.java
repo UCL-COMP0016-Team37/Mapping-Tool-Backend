@@ -3,6 +3,7 @@ package uk.ac.ucl.mappingtool.v2.domain.analysis.request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Query<T> {
     private Integer count;
-    private List<QueryItem<T>> results;
+    private List<BudgetQueryItem<T>> results;
 }

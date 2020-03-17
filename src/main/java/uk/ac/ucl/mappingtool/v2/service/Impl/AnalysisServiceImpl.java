@@ -5,8 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionFromGraph.TransactionFromOrg;
@@ -32,7 +32,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         Query queryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = queryObject.getResults();
         // get value
         Integer count = queryObject.getCount();
 
@@ -41,7 +41,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
         // sum up the total
         double total = 0;
-        for(QueryItem item : results){
+        for(BudgetQueryItem item : results){
             total += item.getValue();
         }
 
@@ -114,7 +114,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         Query queryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = queryObject.getResults();
         // get value
         Integer count = queryObject.getCount();
 
@@ -123,7 +123,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
         // sum up the total
         double total = 0;
-        for(QueryItem item : results){
+        for(BudgetQueryItem item : results){
             total += item.getValue();
         }
 
@@ -191,7 +191,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         Query queryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = queryObject.getResults();
         // get value
         Integer count = queryObject.getCount();
 
@@ -200,7 +200,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
         // sum up the total
         double total = 0;
-        for(QueryItem item : results){
+        for(BudgetQueryItem item : results){
             total += item.getValue();
         }
 
@@ -255,9 +255,9 @@ public class AnalysisServiceImpl implements AnalysisService {
         }
     }
 
-    private class ValueComparator implements Comparator<QueryItem> {
+    private class ValueComparator implements Comparator<BudgetQueryItem> {
         @Override
-        public int compare(QueryItem o1, QueryItem o2) {
+        public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
             if (o1.getValue() > o2.getValue()){
                 return -1;
             } else if(o1.getValue() < o2.getValue()){
