@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
@@ -26,15 +26,15 @@ public class AnalysisServiceImpl implements AnalysisService {
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=" + sectorCode;
         String json = HttpRequest.requestJson(url);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new ValueComparator());
@@ -108,15 +108,15 @@ public class AnalysisServiceImpl implements AnalysisService {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<String>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<String>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new ValueComparator());
@@ -185,15 +185,15 @@ public class AnalysisServiceImpl implements AnalysisService {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<String>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<String>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new ValueComparator());

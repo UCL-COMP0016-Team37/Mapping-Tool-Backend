@@ -27,7 +27,7 @@ public class FilterController {
             @ApiParam(
                     name = "query",
                     type = "String",
-                    value = "Query String follows the iati cloud standard",
+                    value = "BudgetQuery String follows the iati cloud standard",
                     example = "sector_code:(140) AND recipient_country_code:(AF)",
                     required = true
             )

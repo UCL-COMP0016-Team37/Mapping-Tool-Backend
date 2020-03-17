@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.analysis.request;
+package uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Query<T> {
+public class BudgetQuery<T> {
     private Integer count;
     private List<BudgetQueryItem<T>> results;
 }

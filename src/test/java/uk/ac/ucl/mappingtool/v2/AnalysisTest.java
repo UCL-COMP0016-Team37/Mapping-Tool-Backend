@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
@@ -20,12 +20,12 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
-        System.out.println(queryObject);
+        System.out.println(budgetQueryObject);
     }
 
     @Test
@@ -34,13 +34,13 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<BudgetQueryItem>() {
@@ -65,15 +65,15 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<BudgetQueryItem>() {
@@ -136,15 +136,15 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<BudgetQueryItem>() {
@@ -200,13 +200,13 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<BudgetQueryItem>() {
@@ -231,13 +231,13 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<String>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<String>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<BudgetQueryItem>() {
@@ -262,13 +262,13 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<String>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<String>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<BudgetQueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
         Collections.sort(results, new Comparator<BudgetQueryItem>() {
