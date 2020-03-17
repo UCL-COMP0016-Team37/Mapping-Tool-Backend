@@ -4,11 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQuery;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.ResponseItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph.TopOrgs;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionFromGraph.TransactionFromOrg;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionToGraph.TransactionToOrg;
 import uk.ac.ucl.mappingtool.v2.service.AnalysisService;
@@ -51,7 +54,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         if(count == 0){
             return null;  // cannot produce graph
         }else if(count > 0 && count <= 5){
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
             for(int i = 0; i < count; i++){
                 RecipientCountry recipientCountry = (RecipientCountry)results.get(i).getGroup();
@@ -62,16 +65,16 @@ public class AnalysisServiceImpl implements AnalysisService {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
 
-            BudgetToCountry graph = new BudgetToCountry(count, tops, new CountryItem());
+            BudgetToCountry graph = new BudgetToCountry(count, tops, new ResponseItem());
             return graph;
 
         }else{
             // get the top 4 and rest
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
 
             for(int i = 0; i < 4; i++){
@@ -84,7 +87,7 @@ public class AnalysisServiceImpl implements AnalysisService {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
             // rest item
@@ -93,7 +96,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
             Double restPercentage = rest * 100 / total;
 
-            CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
+            ResponseItem restItem = new ResponseItem(countryNarrative, Math.round(rest), restPercentage);
 
             // build graph
             BudgetToCountry graph = new BudgetToCountry(count, tops, restItem);
@@ -133,7 +136,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         if(count == 0){
             return null; // no graphs will return
         }else if(count > 0 && count <= 5){
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
             for(int i = 0; i < count; i++){
                 String name = results.get(i).getGroup(); // receiver Org Name
@@ -142,15 +145,15 @@ public class AnalysisServiceImpl implements AnalysisService {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
 
-            TransactionToOrg graph = new TransactionToOrg(count, tops, new CountryItem());
+            TransactionToOrg graph = new TransactionToOrg(count, tops, new ResponseItem());
             return graph;
         }else{
             // get the top 4 and rest
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
             for(int i = 0; i < 4; i++){
                 String name = results.get(i).getGroup(); // receiver Org Name
@@ -160,7 +163,7 @@ public class AnalysisServiceImpl implements AnalysisService {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
             // rest item
@@ -169,7 +172,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
             Double restPercentage = rest * 100 / total;
 
-            CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
+            ResponseItem restItem = new ResponseItem(countryNarrative, Math.round(rest), restPercentage);
 
             // build graph
             TransactionToOrg graph = new TransactionToOrg(count, tops, restItem);
@@ -210,7 +213,7 @@ public class AnalysisServiceImpl implements AnalysisService {
         if(count == 0){
             return null; // no graphs will return
         }else if(count > 0 && count <= 5){
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
             for(int i = 0; i < count; i++){
                 String name = results.get(i).getGroup(); // receiver Org Name
@@ -219,15 +222,15 @@ public class AnalysisServiceImpl implements AnalysisService {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
 
-            TransactionFromOrg graph = new TransactionFromOrg(count, tops, new CountryItem());
+            TransactionFromOrg graph = new TransactionFromOrg(count, tops, new ResponseItem());
             return graph;
         }else{
             // get the top 4 and rest
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
             for(int i = 0; i < 4; i++){
                 String name = results.get(i).getGroup(); // receiver Org Name
@@ -237,7 +240,7 @@ public class AnalysisServiceImpl implements AnalysisService {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
             // rest item
@@ -246,7 +249,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
             Double restPercentage = rest * 100 / total;
 
-            CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
+            ResponseItem restItem = new ResponseItem(countryNarrative, Math.round(rest), restPercentage);
 
             // build graph
             TransactionFromOrg graph = new TransactionFromOrg(count, tops, restItem);
@@ -255,12 +258,75 @@ public class AnalysisServiceImpl implements AnalysisService {
         }
     }
 
+
+    @Override
+    public TopOrgs plotTopOrgsFromFilter(int sector, String country) {
+        return null;
+    }
+
+    @Override
+    public TopOrgs plotTopDefault() {
+        String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=reporting_organisation&aggregations=count";
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
+
+        Type queryType = new TypeToken<ActivityQuery<String>>(){}.getType();
+
+        Gson gson = new Gson();
+        ActivityQuery budgetQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<ActivityQueryItem<String>> results = budgetQueryObject.getResults();
+        // get total org count
+        Integer totalOrgs = budgetQueryObject.getCount();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new CountComparator());
+
+        double total = 0;
+        for(ActivityQueryItem item : results){
+            total += item.getCount();
+        }
+
+        List<ResponseItem> tops = new ArrayList<>();
+
+        for(int i = 0; i < 100; i++){
+            String name = results.get(i).getGroup(); // org name
+            Integer value = results.get(i).getCount(); // org activity count
+
+
+            Double percentage =  value * 100 / total;
+
+            // make the object
+            ResponseItem item = new ResponseItem(name, Long.valueOf(value), percentage);
+            tops.add(item);
+        }
+
+        TopOrgs graph = new TopOrgs(totalOrgs, tops);
+
+        return graph;
+    }
+
     private class ValueComparator implements Comparator<BudgetQueryItem> {
         @Override
         public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
             if (o1.getValue() > o2.getValue()){
                 return -1;
             } else if(o1.getValue() < o2.getValue()){
+                return 1;
+            } else{
+                return 0;
+            }
+        }
+    }
+
+
+    private class CountComparator implements Comparator<ActivityQueryItem> {
+        @Override
+        public int compare(ActivityQueryItem o1, ActivityQueryItem o2) {
+            if (o1.getCount() > o2.getCount()){
+                return -1;
+            } else if(o1.getCount() < o2.getCount()){
                 return 1;
             } else{
                 return 0;

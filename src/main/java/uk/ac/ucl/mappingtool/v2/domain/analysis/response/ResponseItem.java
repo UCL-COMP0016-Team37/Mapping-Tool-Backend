@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CountryItem {
+public class ResponseItem {
     private String name;
     private Long number;
     private Double percentage;

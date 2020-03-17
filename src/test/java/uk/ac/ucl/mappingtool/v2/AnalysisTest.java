@@ -7,7 +7,7 @@ import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.ResponseItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 
 import java.lang.reflect.Type;
@@ -100,7 +100,7 @@ public class AnalysisTest {
         double rest = total;
 
         // get the top 4 and rest
-        List<CountryItem> tops = new ArrayList<>();
+        List<ResponseItem> tops = new ArrayList<>();
 
 
         for(int i = 0; i < 4; i++){
@@ -113,7 +113,7 @@ public class AnalysisTest {
             Double percentage = value * 100 / total;
 
             // make the object
-            CountryItem item = new CountryItem(name, Math.round(value), percentage);
+            ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
             tops.add(item);
         }
         // rest item
@@ -122,7 +122,7 @@ public class AnalysisTest {
 
         Double restPercentage = rest * 100 / total;
 
-        CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
+        ResponseItem restItem = new ResponseItem(countryNarrative, Math.round(rest), restPercentage);
 
         // build graph
         BudgetToCountry graph = new BudgetToCountry(count, tops, restItem);
@@ -170,7 +170,7 @@ public class AnalysisTest {
             }
 
             // get the top 4 and rest
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
 
             for(int i = 0; i < count; i++){
@@ -182,7 +182,7 @@ public class AnalysisTest {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
 

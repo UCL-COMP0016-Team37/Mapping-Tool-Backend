@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph.TopOrgs;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionFromGraph.TransactionFromOrg;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionToGraph.TransactionToOrg;
 import uk.ac.ucl.mappingtool.v2.service.AnalysisService;
@@ -42,6 +43,13 @@ public class AnalysisController {
     public TransactionFromOrg getTransactionFromOrgGraph(
             @PathVariable("sector") int sectorCode){
         return analysisService.plotTransactionFromOrgGraph(sectorCode);
+    }
+
+    @GetMapping("/topOrgs/")
+    @ApiOperation(value = "Produce the top 100 report organizations with their percentage",
+            notes = "It will only return 100 of them")
+    public TopOrgs getTop100(){
+        return analysisService.plotTopDefault();
     }
 
 }
