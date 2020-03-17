@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.Sector;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.ResponseItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.sectorInGraph.SectorInCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph.TopFilteredOrgs;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph.TopOrgs;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionFromGraph.TransactionFromOrg;
@@ -380,7 +382,84 @@ public class AnalysisServiceImpl implements AnalysisService {
         return graph;
     }
 
+    @Override
+    public SectorInCountry plotSectorInCountryGraph(String country) {
+        String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=sector&aggregations=count&recipient_country=" + country ;
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
 
+        Type queryType = new TypeToken<ActivityQuery<Sector>>(){}.getType();
+
+        Gson gson = new Gson();
+        ActivityQuery activityQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<ActivityQueryItem<Sector>> results = activityQueryObject.getResults();
+        // get total org count
+        Integer totalOrgs = activityQueryObject.getCount();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new CountComparator());
+
+        double total = 0;
+        for(ActivityQueryItem item : results){
+            total += item.getCount();
+        }
+
+        double rest = total;
+
+        if(totalOrgs == 0){
+            return null;
+        }else if(totalOrgs > 0 && totalOrgs <= 5){
+            List<ResponseItem> tops = new ArrayList<>();
+
+            for(int i = 0; i < totalOrgs; i++){
+                Sector sector = (Sector)results.get(i).getGroup();
+
+                String name = sector.getName(); // org name
+                Integer value = results.get(i).getCount(); // org activity count
+
+                Double percentage =  value * 100 / total;
+
+                // make the object
+                ResponseItem item = new ResponseItem(name, Long.valueOf(value), percentage);
+                tops.add(item);
+            }
+
+            SectorInCountry graph = new SectorInCountry(totalOrgs, tops, new ResponseItem());
+
+            return graph;
+
+        }else{
+            List<ResponseItem> tops = new ArrayList<>();
+
+            for(int i = 0; i < 4; i++){
+                Sector sector = (Sector)results.get(i).getGroup();
+
+                String name = sector.getName(); // org name
+                Integer value = results.get(i).getCount(); // org activity count
+                rest -= value;
+
+                Double percentage =  value * 100 / total;
+
+                // make the object
+                ResponseItem item = new ResponseItem(name, Long.valueOf(value), percentage);
+                tops.add(item);
+            }
+
+            // rest item
+            Integer restOrgs = totalOrgs - 4;
+            String restNarrative = restOrgs.toString() + " More";
+
+            Double restPercentage = rest * 100 / total;
+
+            ResponseItem restItem = new ResponseItem(restNarrative, Math.round(rest), restPercentage);
+
+            SectorInCountry graph = new SectorInCountry(totalOrgs, tops, restItem);
+
+            return graph;
+        }
+    }
 
     private class ValueComparator implements Comparator<BudgetQueryItem> {
         @Override

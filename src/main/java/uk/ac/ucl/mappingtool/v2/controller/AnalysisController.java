@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.sectorInGraph.SectorInCountry;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph.TopFilteredOrgs;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph.TopOrgs;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionFromGraph.TransactionFromOrg;
@@ -56,13 +57,20 @@ public class AnalysisController {
 
     @GetMapping("/topOrgs/sector={sector}&country={country}")
     @ApiOperation(value = "Produce the top 4 report organizations with their percentage",
-            notes = "It will return top 4 organizations and rest of it unless it is less than 5 countries in the sector search")
+            notes = "It will return top 4 organizations and rest of it unless it is less than 5 result in the filter")
     public TopFilteredOrgs getTopOrgs(
             @PathVariable("sector")
                     int sectorCode,
             @PathVariable("country")
                     String countryCode){
         return analysisService.plotTopOrgsFromFilter(sectorCode, countryCode);
+    }
+
+    @GetMapping("/sector-in-country/{country}")
+    @ApiOperation(value = "Produce the top 4 Sector in the country with their percentage",
+            notes = "It will return top 4 sectors and rest of it unless it is less than 5 sectors in the country search")
+    public SectorInCountry getSectorInCountryGraph(@PathVariable("country") String countryCode){
+        return analysisService.plotSectorInCountryGraph(countryCode);
     }
 
 
