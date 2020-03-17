@@ -1,15 +1,16 @@
-package uk.ac.ucl.mappingtool.v2.domain.analysis.request;
+package uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class RecipientCountry {
+@NoArgsConstructor
+public class Sector {
     private String url;
-    private String code;
     private String name;
-    private String region;
+    private String code;
 }
+

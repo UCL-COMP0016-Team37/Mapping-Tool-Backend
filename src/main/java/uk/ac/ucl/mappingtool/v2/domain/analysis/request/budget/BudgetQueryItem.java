@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.analysis.request;
+package uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget;
 
 
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QueryItem<T> {
+public class BudgetQueryItem<T> {
     @SerializedName(value = "recipient_country", alternate = {"sector","receiver_org","provider_org"})
     private T group;  // can be changed to what you want to group
     private Integer activity_count;

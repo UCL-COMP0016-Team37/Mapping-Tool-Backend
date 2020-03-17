@@ -1,4 +1,5 @@
-package uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionToGraph;
+package uk.ac.ucl.mappingtool.v2.domain.analysis.response.topOrgGraph;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionToOrg {
-    private Integer orgNum;
-    private List<ResponseItem> tops; // top 4
-    private ResponseItem rest; // rest of all
+public class TopOrgs {
+    private Integer totalOrgs; // total orgs
+    private List<ResponseItem> tops;
 }

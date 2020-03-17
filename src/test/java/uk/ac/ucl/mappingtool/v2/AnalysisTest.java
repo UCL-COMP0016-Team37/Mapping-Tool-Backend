@@ -4,10 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Test;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.activity.Activity;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQuery;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.Sector;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.ResponseItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 
 import java.lang.reflect.Type;
@@ -20,12 +24,12 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
-        System.out.println(queryObject);
+        System.out.println(budgetQueryObject);
     }
 
 //    @Test
@@ -34,18 +38,18 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
-        Collections.sort(results, new Comparator<QueryItem>() {
+        Collections.sort(results, new Comparator<BudgetQueryItem>() {
             @Override
-            public int compare(QueryItem o1, QueryItem o2) {
+            public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
@@ -65,20 +69,20 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
-        Collections.sort(results, new Comparator<QueryItem>() {
+        Collections.sort(results, new Comparator<BudgetQueryItem>() {
             @Override
-            public int compare(QueryItem o1, QueryItem o2) {
+            public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
@@ -93,14 +97,14 @@ public class AnalysisTest {
 
         // sum up the total
         double total = 0;
-        for(QueryItem item : results){
+        for(BudgetQueryItem item : results){
             total += item.getValue();
         }
 
         double rest = total;
 
         // get the top 4 and rest
-        List<CountryItem> tops = new ArrayList<>();
+        List<ResponseItem> tops = new ArrayList<>();
 
 
         for(int i = 0; i < 4; i++){
@@ -113,7 +117,7 @@ public class AnalysisTest {
             Double percentage = value * 100 / total;
 
             // make the object
-            CountryItem item = new CountryItem(name, Math.round(value), percentage);
+            ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
             tops.add(item);
         }
         // rest item
@@ -122,7 +126,7 @@ public class AnalysisTest {
 
         Double restPercentage = rest * 100 / total;
 
-        CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
+        ResponseItem restItem = new ResponseItem(countryNarrative, Math.round(rest), restPercentage);
 
         // build graph
         BudgetToCountry graph = new BudgetToCountry(count, tops, restItem);
@@ -136,20 +140,20 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){} .getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
         // get value
-        Integer count = queryObject.getCount();
+        Integer count = budgetQueryObject.getCount();
 
         // compare the list by value in usd (max to min)
-        Collections.sort(results, new Comparator<QueryItem>() {
+        Collections.sort(results, new Comparator<BudgetQueryItem>() {
             @Override
-            public int compare(QueryItem o1, QueryItem o2) {
+            public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
@@ -165,12 +169,12 @@ public class AnalysisTest {
         }else if(count > 0 && count <= 5){
             // calc total
             double total = 0;
-            for(QueryItem item : results){
+            for(BudgetQueryItem item : results){
                 total += item.getValue();
             }
 
             // get the top 4 and rest
-            List<CountryItem> tops = new ArrayList<>();
+            List<ResponseItem> tops = new ArrayList<>();
 
 
             for(int i = 0; i < count; i++){
@@ -182,7 +186,7 @@ public class AnalysisTest {
                 Double percentage = value * 100 / total;
 
                 // make the object
-                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                ResponseItem item = new ResponseItem(name, Math.round(value), percentage);
                 tops.add(item);
             }
 
@@ -200,18 +204,18 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<RecipientCountry>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
-        Collections.sort(results, new Comparator<QueryItem>() {
+        Collections.sort(results, new Comparator<BudgetQueryItem>() {
             @Override
-            public int compare(QueryItem o1, QueryItem o2) {
+            public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
@@ -231,18 +235,18 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<String>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<String>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
-        Collections.sort(results, new Comparator<QueryItem>() {
+        Collections.sort(results, new Comparator<BudgetQueryItem>() {
             @Override
-            public int compare(QueryItem o1, QueryItem o2) {
+            public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
@@ -262,21 +266,52 @@ public class AnalysisTest {
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
-        Type queryType = new TypeToken<Query<String>>(){}.getType();
+        Type queryType = new TypeToken<BudgetQuery<String>>(){}.getType();
 
         Gson gson = new Gson();
-        Query queryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<QueryItem<String>> results = queryObject.getResults();
+        List<BudgetQueryItem<String>> results = budgetQueryObject.getResults();
 
         // compare the list by value in usd (max to min)
-        Collections.sort(results, new Comparator<QueryItem>() {
+        Collections.sort(results, new Comparator<BudgetQueryItem>() {
             @Override
-            public int compare(QueryItem o1, QueryItem o2) {
+            public int compare(BudgetQueryItem o1, BudgetQueryItem o2) {
                 if (o1.getValue() > o2.getValue()){
                     return -1;
                 } else if(o1.getValue() < o2.getValue()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            }
+        });
+
+        System.out.println(results);
+    }
+
+    @Test
+    public void testSectorForCountry(){
+        String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=sector&aggregations=count&recipient_country=AF";
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
+
+        Type queryType = new TypeToken<ActivityQuery<Sector>>(){}.getType();
+
+        Gson gson = new Gson();
+        ActivityQuery activityQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<ActivityQueryItem<Sector>> results = activityQueryObject.getResults();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new Comparator<ActivityQueryItem>() {
+            @Override
+            public int compare(ActivityQueryItem o1, ActivityQueryItem o2) {
+                if (o1.getCount() > o2.getCount()){
+                    return -1;
+                } else if(o1.getCount() < o2.getCount()){
                     return 1;
                 } else{
                     return 0;
