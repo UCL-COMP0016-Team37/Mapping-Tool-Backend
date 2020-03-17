@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionFromGraph.TransactionFromOrg;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.transactionToGraph.TransactionToOrg;
 import uk.ac.ucl.mappingtool.v2.service.AnalysisService;
 
@@ -33,6 +34,14 @@ public class AnalysisController {
     public TransactionToOrg getTransactionToOrgGraph(
             @PathVariable("sector") int sectorCode){
         return analysisService.plotTransactionToOrgGraph(sectorCode);
+    }
+
+    @GetMapping("/transaction-from-org/{sector}")
+    @ApiOperation(value = "Produce the top 4 providing Organizations in the sector and rest of it with their percentage",
+            notes = "It will return top 4 countries and rest of it unless it is less than 5 countries in the sector search")
+    public TransactionFromOrg getTransactionFromOrgGraph(
+            @PathVariable("sector") int sectorCode){
+        return analysisService.plotTransactionFromOrgGraph(sectorCode);
     }
 
 }

@@ -256,6 +256,37 @@ public class AnalysisTest {
         System.out.println(results);
     }
 
+    @Test
+    public void testTransactionFromOrg(){
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=provider_org&aggregations=activity_count,value&format=json&sector_category=112";
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
+
+        Type queryType = new TypeToken<Query<String>>(){}.getType();
+
+        Gson gson = new Gson();
+        Query queryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<QueryItem<String>> results = queryObject.getResults();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new Comparator<QueryItem>() {
+            @Override
+            public int compare(QueryItem o1, QueryItem o2) {
+                if (o1.getValue() > o2.getValue()){
+                    return -1;
+                } else if(o1.getValue() < o2.getValue()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            }
+        });
+
+        System.out.println(results);
+    }
+
 
 
 }

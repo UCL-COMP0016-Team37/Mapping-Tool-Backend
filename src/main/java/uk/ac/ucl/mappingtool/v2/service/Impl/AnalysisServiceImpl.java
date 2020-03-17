@@ -104,7 +104,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 
     @Override
     public TransactionToOrg plotTransactionToOrgGraph(int sectorCode) {
-        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=receiver_org&aggregations=activity_count,value&format=json&sector_category=112";
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=receiver_org&aggregations=activity_count,value&format=json&sector_category=" + sectorCode;
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
@@ -181,9 +181,79 @@ public class AnalysisServiceImpl implements AnalysisService {
 
     @Override
     public TransactionFromOrg plotTransactionFromOrgGraph(int sectorCode) {
-        return null;
-    }
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=provider_org&aggregations=activity_count,value&format=json&sector_category=" + sectorCode;
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
 
+        Type queryType = new TypeToken<Query<String>>(){}.getType();
+
+        Gson gson = new Gson();
+        Query queryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<QueryItem<String>> results = queryObject.getResults();
+        // get value
+        Integer count = queryObject.getCount();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new ValueComparator());
+
+        // sum up the total
+        double total = 0;
+        for(QueryItem item : results){
+            total += item.getValue();
+        }
+
+        double rest = total;
+
+        /* determined by the count */
+        if(count == 0){
+            return null; // no graphs will return
+        }else if(count > 0 && count <= 5){
+            List<CountryItem> tops = new ArrayList<>();
+
+            for(int i = 0; i < count; i++){
+                String name = results.get(i).getGroup(); // receiver Org Name
+                Double value = results.get(i).getValue();
+
+                Double percentage = value * 100 / total;
+
+                // make the object
+                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                tops.add(item);
+            }
+
+            TransactionFromOrg graph = new TransactionFromOrg(count, tops, new CountryItem());
+            return graph;
+        }else{
+            // get the top 4 and rest
+            List<CountryItem> tops = new ArrayList<>();
+
+            for(int i = 0; i < 4; i++){
+                String name = results.get(i).getGroup(); // receiver Org Name
+                Double value = results.get(i).getValue();
+                rest -= value;
+
+                Double percentage = value * 100 / total;
+
+                // make the object
+                CountryItem item = new CountryItem(name, Math.round(value), percentage);
+                tops.add(item);
+            }
+            // rest item
+            Integer restCount = count - 4;
+            String countryNarrative = restCount.toString() + " More";
+
+            Double restPercentage = rest * 100 / total;
+
+            CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
+
+            // build graph
+            TransactionFromOrg graph = new TransactionFromOrg(count, tops, restItem);
+
+            return graph;
+        }
+    }
 
     private class ValueComparator implements Comparator<QueryItem> {
         @Override
