@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph;
+package uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -7,8 +7,8 @@ import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph.CountryItem;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph.FundingToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 
 import java.lang.reflect.Type;
 import java.util.*;
@@ -125,7 +125,7 @@ public class AnalysisTest {
         CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
 
         // build graph
-        FundingToCountry graph = new FundingToCountry(count, tops, restItem);
+        BudgetToCountry graph = new BudgetToCountry(count, tops, restItem);
 
         System.out.println(graph);
     }

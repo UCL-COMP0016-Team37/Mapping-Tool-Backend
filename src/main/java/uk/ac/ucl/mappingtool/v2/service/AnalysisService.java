@@ -1,7 +1,7 @@
 package uk.ac.ucl.mappingtool.v2.service;
 
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph.FundingToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 
 public interface AnalysisService {
-    public FundingToCountry plotBudgetToCountryGraph(int sectorCode);
+    public BudgetToCountry plotBudgetToCountryGraph(int sectorCode);
 }

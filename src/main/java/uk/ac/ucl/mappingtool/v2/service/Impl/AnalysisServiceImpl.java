@@ -7,8 +7,8 @@ import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph.CountryItem;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.FundingToGraph.FundingToCountry;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 import uk.ac.ucl.mappingtool.v2.service.AnalysisService;
 
 import java.lang.reflect.Type;
@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class AnalysisServiceImpl implements AnalysisService {
     @Override
-    public FundingToCountry plotBudgetToCountryGraph(int sectorCode) {
+    public BudgetToCountry plotBudgetToCountryGraph(int sectorCode) {
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=" + sectorCode;
         String json = HttpRequest.requestJson(url);
 
@@ -75,7 +75,7 @@ public class AnalysisServiceImpl implements AnalysisService {
                 tops.add(item);
             }
 
-            FundingToCountry graph = new FundingToCountry(count, tops, new CountryItem());
+            BudgetToCountry graph = new BudgetToCountry(count, tops, new CountryItem());
             return graph;
 
         }else{
@@ -105,7 +105,7 @@ public class AnalysisServiceImpl implements AnalysisService {
             CountryItem restItem = new CountryItem(countryNarrative, Math.round(rest), restPercentage);
 
             // build graph
-            FundingToCountry graph = new FundingToCountry(count, tops, restItem);
+            BudgetToCountry graph = new BudgetToCountry(count, tops, restItem);
 
             return graph;
         }
