@@ -1,4 +1,5 @@
-package uk.ac.ucl.mappingtool.v2.domain.analysis.request;
+package uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Query<T> {
+public class ActivityQuery<T>{
     private Integer count;
-    private List<QueryItem<T>> results;
+    private List<ActivityQueryItem<T>> results;
 }
