@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class AnalysisTest {
-    @Test
+//    @Test
     public void testQueryAll(){
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json";
         String json = HttpRequest.requestJson(url);
@@ -28,7 +28,7 @@ public class AnalysisTest {
         System.out.println(queryObject);
     }
 
-    @Test
+//    @Test
     public void testSortQuery(){
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=110";
         String json = HttpRequest.requestJson(url);
@@ -59,7 +59,7 @@ public class AnalysisTest {
         System.out.println(results);
     }
 
-    @Test
+//    @Test
     public void testBuildGraph(){
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=110";
         String json = HttpRequest.requestJson(url);
@@ -130,7 +130,7 @@ public class AnalysisTest {
         System.out.println(graph);
     }
 
-    @Test
+//    @Test
     public void testLessThanFive(){
         String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=1121";
         String json = HttpRequest.requestJson(url);
@@ -194,7 +194,7 @@ public class AnalysisTest {
         }
     }
 
-    @Test
+//    @Test
     public void testTransactionToCountry(){
         String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=recipient_country&aggregations=activity_count,value&format=json&sector=112";
         String json = HttpRequest.requestJson(url);
@@ -225,7 +225,7 @@ public class AnalysisTest {
         System.out.println(results);
     }
 
-    @Test
+//    @Test
     public void testTransactionToOrg(){
         String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=receiver_org&aggregations=activity_count,value&format=json&sector_category=112";
         String json = HttpRequest.requestJson(url);
@@ -256,7 +256,7 @@ public class AnalysisTest {
         System.out.println(results);
     }
 
-    @Test
+//    @Test
     public void testTransactionFromOrg(){
         String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=provider_org&aggregations=activity_count,value&format=json&sector_category=112";
         String json = HttpRequest.requestJson(url);
