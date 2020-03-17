@@ -7,7 +7,7 @@ import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 import uk.ac.ucl.mappingtool.v2.service.AnalysisService;
 

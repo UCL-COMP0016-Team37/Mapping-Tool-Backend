@@ -7,7 +7,7 @@ import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.Query;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.QueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.RecipientCountry;
-import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.CountryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph.BudgetToCountry;
 
 import java.lang.reflect.Type;
@@ -195,8 +195,65 @@ public class AnalysisTest {
     }
 
     @Test
-    public void test(){
+    public void testTransactionToCountry(){
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=recipient_country&aggregations=activity_count,value&format=json&sector=112";
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
 
+        Type queryType = new TypeToken<Query<RecipientCountry>>(){}.getType();
+
+        Gson gson = new Gson();
+        Query queryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<QueryItem<RecipientCountry>> results = queryObject.getResults();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new Comparator<QueryItem>() {
+            @Override
+            public int compare(QueryItem o1, QueryItem o2) {
+                if (o1.getValue() > o2.getValue()){
+                    return -1;
+                } else if(o1.getValue() < o2.getValue()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            }
+        });
+
+        System.out.println(results);
+    }
+
+    @Test
+    public void testTransactionToOrg(){
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=receiver_org&aggregations=activity_count,value&format=json&sector_category=112";
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
+
+        Type queryType = new TypeToken<Query<String>>(){}.getType();
+
+        Gson gson = new Gson();
+        Query queryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<QueryItem<String>> results = queryObject.getResults();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new Comparator<QueryItem>() {
+            @Override
+            public int compare(QueryItem o1, QueryItem o2) {
+                if (o1.getValue() > o2.getValue()){
+                    return -1;
+                } else if(o1.getValue() < o2.getValue()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+            }
+        });
+
+        System.out.println(results);
     }
 
 

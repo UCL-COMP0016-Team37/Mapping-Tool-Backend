@@ -3,6 +3,7 @@ package uk.ac.ucl.mappingtool.v2.domain.analysis.response.budgetToGraph;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.response.CountryItem;
 
 import java.util.List;
 
