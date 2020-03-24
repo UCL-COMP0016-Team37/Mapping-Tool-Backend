@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
+import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.FilteredPin;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
 import uk.ac.ucl.mappingtool.v2.service.MapService;
 
@@ -52,4 +53,11 @@ public class MapController {
     public List<ActivityDisplayItem> getDetailPins(@PathVariable("code") String code, @PathVariable("page") Integer page){
         return mapService.getPartPins(code, page);
     }
+
+    @GetMapping(PIN + "/filter/sector/{sector-code}")
+    @ApiOperation(value = "Obtain the filtered sector result on the map", tags = {"Analysis Controller", "Heap Map Controller"})
+    public List<FilteredPin> getFilterSectorPins(@PathVariable("sector-code") String code){
+        return mapService.getFilterSectorPins(code);
+    }
+
 }
