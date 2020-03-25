@@ -15,9 +15,14 @@ These are current implemented version of API base urls:
 * Version 1 (https://mapping-tool-api.azurewebsites.net/api/v1)
     * Users (https://mapping-tool-api.azurewebsites.net/api/v1/users)
     * Projects (https://mapping-tool-api.azurewebsites.net/api/v1/projects)
-    * Search (Not Yet? May not Need it)
 * Version 2 (https://mapping-tool-api.azurewebsites.net/api/v2)
-    * Activity (https://mapping-tool-api.azurewebsites.net/api/v2/activity)
+    * Activity (https://mapping-tool-api.azurewebsites.net/api/v2/activities)
+    * Analysis (https://mapping-tool-api.azurewebsites.net/api/v2/analysis)
+    * Country (https://mapping-tool-api.azurewebsites.net/api/v2/countries)
+    * Filter (https://mapping-tool-api.azurewebsites.net/api/v2/filter)
+    * Map (https://mapping-tool-api.azurewebsites.net/api/v2/maps)
+    * Publisher (https://mapping-tool-api.azurewebsites.net/api/v2/publishers)
+    * Transaction (https://mapping-tool-api.azurewebsites.net/api/v2/transactions)
 
 
 ## Attentions
