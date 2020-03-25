@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BudgetQueryItem<T> {
-    @SerializedName(value = "recipient_country", alternate = {"sector","receiver_org","provider_org"})
+    @SerializedName(value = "recipient_country", alternate = {"reporting_organisation","sector","receiver_org","provider_org"})
     private T group;  // can be changed to what you want to group
     private Integer activity_count;
     private Double value;

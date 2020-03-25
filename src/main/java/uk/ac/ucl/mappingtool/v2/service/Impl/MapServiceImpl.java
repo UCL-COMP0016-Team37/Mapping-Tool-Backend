@@ -86,7 +86,7 @@ public class MapServiceImpl implements MapService {
 
     @Override
     public List<FilteredPin> getFilterCountryPins(String country) {
-        String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=reporting_organisation&aggregations=count&recipient_country=" + country ;
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=reporting_organisation&aggregations=activity_count,value&format=json&recipient_country=" + country ;
         String json = HttpRequest.requestJson(url);
 //        System.out.println(json);
 
@@ -99,6 +99,8 @@ public class MapServiceImpl implements MapService {
         List<ActivityQueryItem<String>> results = budgetQueryObject.getResults();
         // get total org count
         Integer totalOrgs = budgetQueryObject.getCount();
+
+
 
         return null;
     }
