@@ -1,7 +1,9 @@
 package uk.ac.ucl.mappingtool.v2.service;
 
 import uk.ac.ucl.mappingtool.v1.domain.Project;
+import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
+import uk.ac.ucl.mappingtool.v2.domain.map.flowMap.CountryFlow;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.FilteredPin;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
 
@@ -12,5 +14,5 @@ public interface MapService {
     public List<ProjectPin> getAllPins();
     public List<ActivityDisplayItem> getPartPins(String code, int page);
     public List<FilteredPin> getFilterSectorPins(String sector); // country
-    public List<FilteredPin> getFilterCountryPins(String country);  // organizations with transaction
+    public CountryFlow getFilterCountryFlow(String country);  // organizations with transaction
 }

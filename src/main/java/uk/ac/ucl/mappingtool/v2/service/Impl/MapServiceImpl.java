@@ -10,13 +10,17 @@ import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.Organisation;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
+import uk.ac.ucl.mappingtool.v2.domain.map.flowMap.CountryFlow;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.FilteredPin;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
+import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 import uk.ac.ucl.mappingtool.v2.repository.CountryRepository;
+import uk.ac.ucl.mappingtool.v2.repository.PublisherRepository;
 import uk.ac.ucl.mappingtool.v2.service.MapService;
 
 import java.lang.reflect.Type;
@@ -27,6 +31,8 @@ import java.util.*;
 public class MapServiceImpl implements MapService {
     @Autowired
     private CountryRepository countryRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
 
     @Override
     public ProjectPin getOnePin(String code) {
@@ -85,24 +91,34 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public List<FilteredPin> getFilterCountryPins(String country) {
-        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=reporting_organisation&aggregations=activity_count,value&format=json&recipient_country=" + country ;
-        String json = HttpRequest.requestJson(url);
-//        System.out.println(json);
+    public CountryFlow getFilterCountryFlow(String country) {
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=reporting_organisation&aggregations=activity_count,value&format=json&recipient_country=" + country;
 
-        Type queryType = new TypeToken<ActivityQuery<String>>(){}.getType();
+        String json = HttpRequest.requestJson(url);
+
+        Type queryType = new TypeToken<BudgetQuery<Organisation>>(){} .getType();
 
         Gson gson = new Gson();
-        ActivityQuery budgetQueryObject = gson.fromJson(json, queryType);
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
 
         // get list
-        List<ActivityQueryItem<String>> results = budgetQueryObject.getResults();
-        // get total org count
-        Integer totalOrgs = budgetQueryObject.getCount();
+        List<BudgetQueryItem<Organisation>> results = budgetQueryObject.getResults();
 
 
+        for(BudgetQueryItem<Organisation> item: results){
+            String orgId = item.getGroup().getId();
 
-        return null;
+            Optional<Publisher> optional = publisherRepository.findById(orgId);
+            Publisher publisher = optional.get();
+
+            String countryCode = publisher.getCountryCode();
+
+            item.getGroup().setCountryCode(countryCode);
+        }
+
+        CountryFlow countryFlow = new CountryFlow(country, results);
+
+        return countryFlow;
     }
 
     @Override

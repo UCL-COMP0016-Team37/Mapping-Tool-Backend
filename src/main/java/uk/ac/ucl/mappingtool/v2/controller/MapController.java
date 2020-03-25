@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.ac.ucl.mappingtool.v2.constant.PropertyConst;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
+import uk.ac.ucl.mappingtool.v2.domain.map.flowMap.CountryFlow;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.FilteredPin;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
 import uk.ac.ucl.mappingtool.v2.service.MapService;
@@ -59,5 +60,12 @@ public class MapController {
     public List<FilteredPin> getFilterSectorPins(@PathVariable("sector-code") String code){
         return mapService.getFilterSectorPins(code);
     }
+
+    @GetMapping(PIN + "/filter/country/{country-code}")
+    @ApiOperation(value = "Obtain the filtered country result on the map", tags = {"Analysis Controller", "Flow Map Controller"})
+    public CountryFlow getFilterCountryFlow(@PathVariable("country-code") String code){
+        return mapService.getFilterCountryFlow(code);
+    }
+
 
 }

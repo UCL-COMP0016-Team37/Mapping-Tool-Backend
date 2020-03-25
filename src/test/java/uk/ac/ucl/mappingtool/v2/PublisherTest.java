@@ -4,16 +4,35 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+import uk.ac.ucl.mappingtool.MappingToolApplication;
 import uk.ac.ucl.mappingtool.util.Reader;
 import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.publisher.PublisherReq;
+import uk.ac.ucl.mappingtool.v2.repository.PublisherRepository;
 
 import java.awt.*;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.List;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class PublisherTest {
+    @Autowired
+    private PublisherRepository publisherRepository;
+
     private Map<String, String> countries = new HashMap<>();
 
     @Before
@@ -79,6 +98,18 @@ public class PublisherTest {
         }
 
         System.out.println(jpaPublishers);
+    }
+
+    // use mockito
+    @Test
+    public void testGetOnePublisherById(){
+        String id = "GB-COH-1100897";
+
+        Optional<Publisher> optional = publisherRepository.findById(id);
+        Publisher publisher = optional.get();
+        String name = publisher.getName();
+
+        System.out.println(name);
     }
 
 

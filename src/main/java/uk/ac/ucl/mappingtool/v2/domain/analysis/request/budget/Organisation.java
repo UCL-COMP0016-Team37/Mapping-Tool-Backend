@@ -14,4 +14,5 @@ public class Organisation {
     @SerializedName(value = "primary_name")
     private String name;
     private String url;
+    private String countryCode;
 }
