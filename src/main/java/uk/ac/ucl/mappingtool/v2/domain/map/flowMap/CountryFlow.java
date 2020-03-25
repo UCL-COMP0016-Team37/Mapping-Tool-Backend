@@ -14,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class CountryFlow {
     private String destinationCode;
-    private List<BudgetQueryItem<Organisation>> organisations;
+    private List<Funding> funding;
 }

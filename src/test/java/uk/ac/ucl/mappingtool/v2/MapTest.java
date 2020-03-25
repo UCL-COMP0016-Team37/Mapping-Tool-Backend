@@ -16,13 +16,16 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
+import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.coordinate.Coordinate;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.Organisation;
 import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
+import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
 import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
+import uk.ac.ucl.mappingtool.v2.repository.CountryRepository;
 import uk.ac.ucl.mappingtool.v2.repository.PublisherRepository;
 
 import javax.persistence.EntityManager;
@@ -38,6 +41,9 @@ public class MapTest {
 
     @Autowired
     private PublisherRepository publisherRepository;
+
+    @Autowired
+    private CountryRepository countryRepository;
 
     @Test
     public void testRequestURL(){
@@ -87,10 +93,16 @@ public class MapTest {
             String countryCode = publisher.getCountryCode();
 
             item.getGroup().setCountryCode(countryCode);
+//            System.out.println(countryCode);
+
+            Optional<Country> optionalFrom = countryRepository.findById(countryCode);
+            Country providerCountry = optionalFrom.get();
+            System.out.println(countryCode);
+            System.out.println(providerCountry.getName());
 
         }
 
-        System.out.println(results);
+//        System.out.println(results);
 
 
 

@@ -15,6 +15,7 @@ import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
 import uk.ac.ucl.mappingtool.v2.domain.map.flowMap.CountryFlow;
+import uk.ac.ucl.mappingtool.v2.domain.map.flowMap.Funding;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.FilteredPin;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
 import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
@@ -105,20 +106,36 @@ public class MapServiceImpl implements MapService {
         List<BudgetQueryItem<Organisation>> results = budgetQueryObject.getResults();
 
 
+        List<Funding> fundingList = new ArrayList<>();
+
+        // set to coordinates
+        Optional<Country> optionalTo = countryRepository.findById(country);
+        Country recipientCountry = optionalTo.get();
+        Coordinate to = new Coordinate(recipientCountry.getLongitude(), recipientCountry.getLatitude());
+
+
         for(BudgetQueryItem<Organisation> item: results){
             String orgId = item.getGroup().getId();
 
             Optional<Publisher> optional = publisherRepository.findById(orgId);
+            if(!optional.isPresent()){
+                continue;
+            }
             Publisher publisher = optional.get();
-
             String countryCode = publisher.getCountryCode();
-
             item.getGroup().setCountryCode(countryCode);
+
+            // set to coordinates
+            Optional<Country> optionalFrom = countryRepository.findById(countryCode);
+            Country providerCountry = optionalFrom.get();
+            Coordinate from = new Coordinate(providerCountry.getLongitude(), providerCountry.getLatitude());
+
+            Funding funding = new Funding(item, from, to);
+            fundingList.add(funding);
         }
 
-        CountryFlow countryFlow = new CountryFlow(country, results);
+         return new CountryFlow(country, fundingList);
 
-        return countryFlow;
     }
 
     @Override
