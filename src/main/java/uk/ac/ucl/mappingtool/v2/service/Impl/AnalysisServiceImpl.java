@@ -340,6 +340,81 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
+    public TopFilteredOrgs plotTopOrgsFromFilterCounrty(String country) {
+        String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=reporting_organisation&aggregations=count&recipient_country=" + country ;
+        String json = HttpRequest.requestJson(url);
+//        System.out.println(json);
+
+        Type queryType = new TypeToken<ActivityQuery<String>>(){}.getType();
+
+        Gson gson = new Gson();
+        ActivityQuery budgetQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<ActivityQueryItem<String>> results = budgetQueryObject.getResults();
+        // get total org count
+        Integer totalOrgs = budgetQueryObject.getCount();
+
+        // compare the list by value in usd (max to min)
+        Collections.sort(results, new CountComparator());
+
+        double total = 0;
+        for(ActivityQueryItem item : results){
+            total += item.getCount();
+        }
+
+        double rest = total;
+
+        if(totalOrgs == 0){
+            return null;
+        }else if(totalOrgs > 0 && totalOrgs <= 5){
+            List<ResponseItem> tops = new ArrayList<>();
+
+            for(int i = 0; i < totalOrgs; i++){
+                String name = results.get(i).getGroup(); // org name
+                Integer value = results.get(i).getCount(); // org activity count
+
+                Double percentage =  value * 100 / total;
+
+                // make the object
+                ResponseItem item = new ResponseItem(name, Long.valueOf(value), percentage);
+                tops.add(item);
+            }
+
+            TopFilteredOrgs graph = new TopFilteredOrgs(totalOrgs, tops, new ResponseItem());
+
+            return graph;
+
+        }else{
+            List<ResponseItem> tops = new ArrayList<>();
+
+            for(int i = 0; i < 4; i++){
+                String name = results.get(i).getGroup(); // org name
+                Integer value = results.get(i).getCount(); // org activity count
+                rest -= value;
+
+                Double percentage =  value * 100 / total;
+
+                // make the object
+                ResponseItem item = new ResponseItem(name, Long.valueOf(value), percentage);
+                tops.add(item);
+            }
+
+            // rest item
+            Integer restOrgs = totalOrgs - 4;
+            String restNarrative = restOrgs.toString() + " More";
+
+            Double restPercentage = rest * 100 / total;
+
+            ResponseItem restItem = new ResponseItem(restNarrative, Math.round(rest), restPercentage);
+
+            TopFilteredOrgs graph = new TopFilteredOrgs(totalOrgs, tops, restItem);
+
+            return graph;
+        }
+    }
+
+    @Override
     public TopOrgs plotTopDefault() {
         String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=reporting_organisation&aggregations=count";
         String json = HttpRequest.requestJson(url);

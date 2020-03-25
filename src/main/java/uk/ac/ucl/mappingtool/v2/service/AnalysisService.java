@@ -12,6 +12,7 @@ public interface AnalysisService {
     public TransactionToOrg plotTransactionToOrgGraph(int sectorCode);
     public TransactionFromOrg plotTransactionFromOrgGraph(int sectorCode);
     public TopFilteredOrgs plotTopOrgsFromFilter(int sector, String country);
+    public TopFilteredOrgs plotTopOrgsFromFilterCounrty(String country);
     public TopOrgs plotTopDefault();
     public SectorInCountry plotSectorInCountryGraph(String country);
 }

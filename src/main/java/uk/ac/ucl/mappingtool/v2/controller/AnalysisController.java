@@ -66,6 +66,13 @@ public class AnalysisController {
         return analysisService.plotTopOrgsFromFilter(sectorCode, countryCode);
     }
 
+    @GetMapping("/topOrgs/country={country}")
+    @ApiOperation(value = "Produce the top 4 report organizations with their percentage (Filter Country Only)",
+            notes = "It will return top 4 organizations and rest of it unless it is less than 5 result in the filter")
+    public TopFilteredOrgs getTopOrgsCountry(@PathVariable("country") String countryCode){
+        return analysisService.plotTopOrgsFromFilterCounrty(countryCode);
+    }
+
     @GetMapping("/sector-in-country/{country}")
     @ApiOperation(value = "Produce the top 4 Sector in the country with their percentage",
             notes = "It will return top 4 sectors and rest of it unless it is less than 5 sectors in the country search")
