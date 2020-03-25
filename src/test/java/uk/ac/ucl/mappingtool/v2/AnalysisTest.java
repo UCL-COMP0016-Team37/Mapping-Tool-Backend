@@ -291,7 +291,7 @@ public class AnalysisTest {
         System.out.println(results);
     }
 
-    @Test
+//    @Test
     public void testSectorForCountry(){
         String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=sector&aggregations=count&recipient_country=AF";
         String json = HttpRequest.requestJson(url);
