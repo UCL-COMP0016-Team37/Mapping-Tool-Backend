@@ -1,4 +1,4 @@
-package uk.ac.ucl.mappingtool.v2.domain.map.fundingFlow;
+package uk.ac.ucl.mappingtool.v2.domain.map.flowMap;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

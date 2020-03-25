@@ -6,23 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.ac.ucl.mappingtool.util.HttpRequest;
 import uk.ac.ucl.mappingtool.v2.domain.abstractAttributes.coordinate.Coordinate;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQuery;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.activity.ActivityQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQuery;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.BudgetQueryItem;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.Organisation;
+import uk.ac.ucl.mappingtool.v2.domain.analysis.request.budget.RecipientCountry;
 import uk.ac.ucl.mappingtool.v2.domain.country.Country;
 import uk.ac.ucl.mappingtool.v2.domain.country.countryRes.ActivityDisplayItem;
+import uk.ac.ucl.mappingtool.v2.domain.map.flowMap.CountryFlow;
+import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.FilteredPin;
 import uk.ac.ucl.mappingtool.v2.domain.map.mainMap.ProjectPin;
+import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.result.ListView;
 import uk.ac.ucl.mappingtool.v2.repository.CountryRepository;
+import uk.ac.ucl.mappingtool.v2.repository.PublisherRepository;
 import uk.ac.ucl.mappingtool.v2.service.MapService;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
 public class MapServiceImpl implements MapService {
     @Autowired
     private CountryRepository countryRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
 
     @Override
     public ProjectPin getOnePin(String code) {
@@ -43,6 +53,72 @@ public class MapServiceImpl implements MapService {
         }
 
         return pinList;
+    }
+
+    @Override
+    public List<FilteredPin> getFilterSectorPins(String sectorCode) {
+        String url = "https://iatidatastore.iatistandard.org/api/budgets/aggregations/?group_by=recipient_country&aggregations=value,activity_count&format=json&sector=" + sectorCode;
+        String json = HttpRequest.requestJson(url);
+
+        Type queryType = new TypeToken<BudgetQuery<RecipientCountry>>(){} .getType();
+
+        Gson gson = new Gson();
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<BudgetQueryItem<RecipientCountry>> results = budgetQueryObject.getResults();
+
+        List<FilteredPin> pins = new ArrayList<>();
+
+        for(BudgetQueryItem<RecipientCountry> item : results){
+            String countryCode = item.getGroup().getCode();
+            Optional<Country> optional = countryRepository.findById(countryCode);
+            Country country = optional.get();
+
+            String code = country.getCode();
+            String name = country.getName();
+            String longitude = country.getLongitude();
+            String latitude = country.getLatitude();
+            Coordinate coordinate = new Coordinate(longitude, latitude);
+            Integer count = item.getActivity_count();
+            Double value = item.getValue();
+
+            FilteredPin pin = new FilteredPin(code, name, coordinate, count, value);
+            pins.add(pin);
+        }
+
+        return pins;
+    }
+
+    @Override
+    public CountryFlow getFilterCountryFlow(String country) {
+        String url = "https://iatidatastore.iatistandard.org/api/transactions/aggregations/?group_by=reporting_organisation&aggregations=activity_count,value&format=json&recipient_country=" + country;
+
+        String json = HttpRequest.requestJson(url);
+
+        Type queryType = new TypeToken<BudgetQuery<Organisation>>(){} .getType();
+
+        Gson gson = new Gson();
+        BudgetQuery budgetQueryObject = gson.fromJson(json, queryType);
+
+        // get list
+        List<BudgetQueryItem<Organisation>> results = budgetQueryObject.getResults();
+
+
+        for(BudgetQueryItem<Organisation> item: results){
+            String orgId = item.getGroup().getId();
+
+            Optional<Publisher> optional = publisherRepository.findById(orgId);
+            Publisher publisher = optional.get();
+
+            String countryCode = publisher.getCountryCode();
+
+            item.getGroup().setCountryCode(countryCode);
+        }
+
+        CountryFlow countryFlow = new CountryFlow(country, results);
+
+        return countryFlow;
     }
 
     @Override
