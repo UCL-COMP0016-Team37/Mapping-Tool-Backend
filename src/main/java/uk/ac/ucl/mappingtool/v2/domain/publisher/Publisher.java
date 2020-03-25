@@ -22,6 +22,13 @@ public class Publisher {
     @SerializedName("IATI Organisation Identifier")
     private String id;
 
+    @Column(nullable = false, name = "country_code")
+    private String countryCode;
+
+    @Column(nullable = false, name = "org_headquarter")
+    @SerializedName("HQ Country or Region")
+    private String hq;
+
     @Column(nullable = false, name = "org_name")
     @SerializedName("Publisher")
     private String name;
@@ -30,9 +37,6 @@ public class Publisher {
     @SerializedName("Organization Type")
     private String type;
 
-    @Column(nullable = false, name = "org_headquarter")
-    @SerializedName("HQ Country or Region")
-    private String hq;
 
     @Column(name = "dataset_count")
     @SerializedName("Datasets Count")
