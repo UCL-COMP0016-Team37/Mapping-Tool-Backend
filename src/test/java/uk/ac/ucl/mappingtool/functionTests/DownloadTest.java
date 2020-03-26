@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class DownloadTest {
 
-//    @Test
+    @Test
     public void testDownloadOrgJson() throws IOException {
         String url = "https://www.iatiregistry.org/publisher/download_list/json";
         String dir = "/src/main/resources/static/";
@@ -17,20 +17,20 @@ public class DownloadTest {
         Download.downloadHttpUrl(url, dir, fileName);
     }
 
-//    @Test
+    @Test
     public void testReadJson() throws IOException{
         String filePath = "/src/main/resources/static/orgList.json";
         String res = Reader.readFileContent(filePath);
         System.out.println(res);
     }
 
-//    @Test
+    @Test
     public void testDeleteFile() throws IOException{
         String filePath = "/src/main/resources/static/orgList.json";
         Delete.deleteOneFile(filePath);
     }
 
-//    @Test
+    @Test
     public void testDeleteDir() throws IOException {
         String dirPath = System.getProperty("user.dir") + "/src/main/resources/static/";
         Delete.deleteDirFiles(dirPath);
