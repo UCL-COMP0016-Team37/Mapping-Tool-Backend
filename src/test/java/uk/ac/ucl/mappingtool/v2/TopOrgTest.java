@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TopOrgTest {
 
-//    @Test
+    @Test
     public void testOrgAggregation(){
         String url = "https://iatidatastore.iatistandard.org/api/activities/aggregations/?format=json&group_by=reporting_organisation&aggregations=count";
         String json = HttpRequest.requestJson(url);

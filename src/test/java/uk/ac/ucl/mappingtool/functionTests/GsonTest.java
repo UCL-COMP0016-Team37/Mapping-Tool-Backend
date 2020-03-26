@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -43,7 +44,7 @@ public class GsonTest {
     }
 
 
-//    @Test
+    @Test
     public void testGsonSerialize(){
         String activityJson = res;
         Gson gson = new Gson();
@@ -53,7 +54,7 @@ public class GsonTest {
         System.out.println(activityObject.toString());
     }
 
-//    @Test
+    @Test
     public void testGsonSerialize1(){
         String activityJson = res;
         Gson gson = new Gson();
@@ -70,7 +71,7 @@ public class GsonTest {
         System.out.println(result);
     }
 
-//    @Test
+    @Test
     public void testGsonSerializeIgnore(){
         String activityJson = res;
         Gson gson = new Gson();
@@ -106,7 +107,7 @@ public class GsonTest {
 
     }
 
-//    @Test
+    @Test
     public void testGsonSerializePublisherList() throws IOException {
         String json = Reader.readFileContent("/src/main/resources/static/orgList.json");
 
