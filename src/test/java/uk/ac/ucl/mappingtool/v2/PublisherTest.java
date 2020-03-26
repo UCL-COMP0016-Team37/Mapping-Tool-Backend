@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,6 +22,8 @@ import uk.ac.ucl.mappingtool.util.Reader;
 import uk.ac.ucl.mappingtool.v2.domain.publisher.Publisher;
 import uk.ac.ucl.mappingtool.v2.domain.publisher.PublisherReq;
 import uk.ac.ucl.mappingtool.v2.repository.PublisherRepository;
+import uk.ac.ucl.mappingtool.v2.service.Impl.PublisherServiceImpl;
+import uk.ac.ucl.mappingtool.v2.service.PublisherService;
 
 import java.awt.*;
 import java.lang.reflect.Type;
@@ -30,8 +34,14 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class PublisherTest {
-    @Autowired
+//    @Autowired
+//    private PublisherRepository publisherRepository;
+
+    @Mock
     private PublisherRepository publisherRepository;
+
+    @InjectMocks
+    private PublisherService publisherService = new PublisherServiceImpl();
 
     private Map<String, String> countries = new HashMap<>();
 
